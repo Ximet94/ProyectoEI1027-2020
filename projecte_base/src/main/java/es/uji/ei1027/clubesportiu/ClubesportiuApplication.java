@@ -24,31 +24,8 @@ public class ClubesportiuApplication implements CommandLineRunner {
 
 	// Funció principal
 	public void run(String... strings) throws Exception {
-		/*log.info("Ací va el meu codi");
-		log.info("Selecciona la nadadora Gemma Mengual");
-		Nadador n1 = jdbcTemplate.queryForObject(
-		     "SELECT * FROM Nadador WHERE nom = 'Gemma Mengual'",
-		     new NadadorRowMapper());
-		log.info(n1.toString());
-		log.info("Selecciona la nadadora Gemma Mengual (amb paràmetre)");
-		Nadador n2 = jdbcTemplate.queryForObject(
-		     "SELECT * FROM Nadador WHERE nom =?",
-		     new NadadorRowMapper(),
-		     "Gemma Mengual");
-		log.info(n2.toString());*/
 		
-		//Exercici 3
-		log.info("Actualitza l'edat de la nadadora Ariadna Edo a 21 anys");
-		jdbcTemplate.update("UPDATE nadador SET edat=? Where nom='Ariadna Edo' ",21);
-		log.info("I comprova que s'haja modificat correctament");
-		mostraNadador("Ariadna Edo");
-
-		log.info("Esborra la nadadora Ariadna Edo");
-		jdbcTemplate.update("DELETE from nadador Where nom='Ariadna Edo' ");
-		log.info("I comprova que s'haja esborrat correctament");
-		mostraNadador("Ariadna Edo");
-
-		provaNadadorDao();
+		//provaNadadorDao();
 	}	
 	// Configura l'accés a la base de dades (DataSource)
 	// a partir de les propietats a src/main/resources/applications.properties
@@ -68,7 +45,7 @@ public class ClubesportiuApplication implements CommandLineRunner {
 	    jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
-	void mostraNadador(String nomNadador) {
+	/*void mostraNadador(String nomNadador) {
 		try {
             log.info(jdbcTemplate.queryForObject("SELECT * from Nadador WHERE nom=?",
                     new NadadorRowMapper(), nomNadador).toString());
@@ -76,13 +53,14 @@ public class ClubesportiuApplication implements CommandLineRunner {
         catch(EmptyResultDataAccessException e) {
             log.info("El nadador " + nomNadador  + " no es troba a la base de dades");
         }
-	}
+	}*/
 	
 	// Demana a Spring que ens proporcione una instància de NadadorDAO
 	// mitjanjant injecció de dependencies
+	
 	@Autowired
-	NadadorDao nadadorDao;
-
+	TrabajadorSocialDao TrabajdorSocialDao;
+/*
 	void provaNadadorDao() {
 	  log.info("Provant NadadorDao");
 	  log.info("Tots els nadadors");
@@ -112,5 +90,5 @@ public class ClubesportiuApplication implements CommandLineRunner {
 	  if (nadadorDao.getNadador("Ariadna Edo") == null) {
 	     log.info("Esborrada correctament");
 	  }
-	}
+	}*/
 }
