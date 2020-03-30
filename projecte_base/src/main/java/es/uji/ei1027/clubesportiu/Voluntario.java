@@ -11,7 +11,7 @@ public class Voluntario {
 	private String hobbies;
 	private Date fecha_aplicacion;
 	private Date fecha_aceptacion;
-	private boolean aceptado;
+	private String estado;
 	private Date fecha_ncto;
 	
 	
@@ -21,7 +21,7 @@ public class Voluntario {
 
 
 	public Voluntario(String usuario, String pwd, String nombre, String telefono, String email, String hobbies,
-			Date fecha_aplicacion, Date fecha_aceptacion, boolean aceptado, Date fecha_ncto) {
+			Date fecha_aplicacion, Date fecha_aceptacion, String estado, Date fecha_ncto) {
 		super();
 		this.usuario = usuario;
 		this.pwd = pwd;
@@ -31,7 +31,7 @@ public class Voluntario {
 		this.hobbies = hobbies;
 		this.fecha_aplicacion = fecha_aplicacion;
 		this.fecha_aceptacion = fecha_aceptacion;
-		this.aceptado = aceptado;
+		this.estado = estado;
 		this.fecha_ncto = fecha_ncto;
 	}
 
@@ -116,13 +116,13 @@ public class Voluntario {
 	}
 
 
-	public boolean isAceptado() {
-		return aceptado;
+	public String getEstado() {
+		return estado;
 	}
 
 
-	public void setAceptado(boolean aceptado) {
-		this.aceptado = aceptado;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 
@@ -140,7 +140,7 @@ public class Voluntario {
 	public String toString() {
 		return "Voluntario [usuario=" + usuario + ", pwd=" + pwd + ", nombre=" + nombre + ", telefono=" + telefono
 				+ ", email=" + email + ", hobbies=" + hobbies + ", fecha_aplicacion=" + fecha_aplicacion
-				+ ", fecha_aceptacion=" + fecha_aceptacion + ", aceptado=" + aceptado + ", fecha_ncto=" + fecha_ncto
+				+ ", fecha_aceptacion=" + fecha_aceptacion + ", estado=" + estado + ", fecha_ncto=" + fecha_ncto
 				+ "]";
 	}
 }

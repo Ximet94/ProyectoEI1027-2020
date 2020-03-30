@@ -20,7 +20,7 @@ public class VoluntarioDao {
 	   void addVoluntario(Voluntario voluntario) {
 	       jdbcTemplate.update("INSERT INTO Voluntario VALUES(?,?,?,?,?,?,?,?,?,?)", voluntario.getUsuario(), voluntario.getPwd(),
 	    		   voluntario.getNombre(), voluntario.getTelefono(), voluntario.getEmail(), voluntario.getHobbies(), voluntario.getFecha_aplicacion(),
-	    		   voluntario.getFecha_aceptacion(), voluntario.isAceptado(), voluntario.getFecha_ncto());
+	    		   voluntario.getFecha_aceptacion(), voluntario.getEstado(), voluntario.getFecha_ncto());
 	   }
 
 	   void deleteTrabajadorSocial(Voluntario voluntario) {
@@ -28,10 +28,10 @@ public class VoluntarioDao {
 	   }
 
 		void updateVoluntario(Voluntario voluntario) {
-			jdbcTemplate.update("UPDATE Voluntario SET pwd=?, nombre=?, telefono=?, email=?, hobbies=?, fecha_aplicacion=?, fecha_aceptacion=?, aceptado=?, fecha_ncto=?",
+			jdbcTemplate.update("UPDATE Voluntario SET pwd=?, nombre=?, telefono=?, email=?, hobbies=?, fecha_aplicacion=?, fecha_aceptacion=?, estado=?, fecha_ncto=?",
 					voluntario.getPwd(), voluntario.getNombre(), voluntario.getTelefono(), voluntario.getEmail(),
 					voluntario.getHobbies(), voluntario.getFecha_aplicacion(), voluntario.getFecha_aceptacion(),
-					voluntario.isAceptado(), voluntario.getFecha_ncto());
+					voluntario.getEstado(), voluntario.getFecha_ncto());
 		}
 	   
 		Voluntario getVoluntario(String usuario) {

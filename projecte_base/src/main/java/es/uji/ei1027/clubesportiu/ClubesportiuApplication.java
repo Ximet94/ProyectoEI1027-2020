@@ -1,94 +1,106 @@
 package es.uji.ei1027.clubesportiu;
 
-import java.util.logging.Logger;
-import javax.sql.DataSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.sql.*;
+import java.util.Properties;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @SpringBootApplication
 public class ClubesportiuApplication implements CommandLineRunner {
 
-	private static final Logger log = Logger.getLogger(ClubesportiuApplication .class.getName());
+    public static void main(String[] argv) {
 
-	public static void main(String[] args) {
-		// Auto-configura l'aplicació
-		new SpringApplicationBuilder(ClubesportiuApplication .class).run(args);
-	}
+        // En primer lloc, ens assegurem que el driver de PostgreSQL està disponible
+        System.out.println("Prova de connexió a PostgreSQL amb JDBC");
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("El driver de JDBC no està al Classpath!");
+            e.printStackTrace();
+            return;
+        }
+        System.out.println("Driver JDBC de PostgreSQL registrat");
 
-	// Funció principal
-	public void run(String... strings) throws Exception {
+        // A continuació, creem la connexió
+        // En el següent bloc, has de canviar:
+        // * En la cadena 'url', substitueix BD pel nom de la base de dades on tens les taules de pràctiques
+        // * En les propietats "user" i "password" has de posar el teu usuari i contrasenya
+        Connection connection = null;
+        try {
+            String url = "jdbc:postgresql://db-aules.uji.es/BD";
+            Properties props = new Properties();
+            props.setProperty("user", "alxxxxxx");
+            props.setProperty("password", ".......");
+            props.setProperty("ssl", "true");
+            props.setProperty("sslfactory", "org.postgresql.ssl.NonValidatingFactory");
+            connection = DriverManager.getConnection(url, props);
+        } catch (SQLException e) {
+            System.out.println("Error de connexió");
+            e.printStackTrace();
+            return;
+        }
+        if (connection != null) {
+            System.out.println("Connectat correctament!");
+        } else {
+            System.out.println("La connexió ha fallat!");
+        }
+
+        // Ara, anem a fer una consulta per a extraure
+        // les dades de la taula Nadador
+        ResultSet resultSet = null;
+        Statement statement = null;
+        try {
+            System.out.println("Executant la consulta...");
+            statement = connection.createStatement();
+
+            String sql = "SELECT * FROM Nadador";
+
+            resultSet = statement.executeQuery(sql);
+            System.out.println("Dades trobades...");
+            // Mostrar el ResultSet
+            if (resultSet != null) { // Si result == null no hi ha dades que mostrar
+                while (resultSet.next()) // amb este while processem totes les tuples que hi ha en el ResultSet
+                {   /* Per a cada columna hem de buscar la seua dada:*/
+                    System.out.println("Nom del nadador: " + resultSet.getString(1));  //en este cas accedim per número de columna
+                    System.out.println("Num. federat: " + resultSet.getString(2));
+                    System.out.println("País del nadador: " + resultSet.getString(3));
+                    System.out.println("Edat del nadador: " + resultSet.getInt(4));
+                    System.out.println("Sexe del nadador: " + resultSet.getString(5));
+                    System.out.println("----------------------------------");
+                }
+            }
+        }
+        catch (SQLException e) {
+            System.out.println("No ha segut possible executar la consulta.... ");
+            e.printStackTrace();
+            return;
+        }
+        finally {
+            // Cal alliberar explícitament tots els recursos
+            System.out.println("Alliberant recursos...");
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Fet!");
+    }
+
+	@Override
+	public void run(String... args) throws Exception {
+		// TODO Apéndice de método generado automáticamente
 		
-		//provaNadadorDao();
-	}	
-	// Configura l'accés a la base de dades (DataSource)
-	// a partir de les propietats a src/main/resources/applications.properties
-	// que comencen pel prefix spring.datasource
-	@Bean
-	@ConfigurationProperties(prefix = "spring.datasource")
-	public DataSource dataSource() {
-	  return DataSourceBuilder.create().build();
 	}
-	
-	// Plantilla per a executar operacions sobre la conexió 
-	private JdbcTemplate jdbcTemplate;
 
-	// Crea el jdbcTemplate a partir del DataSource que hem configurat
-	@Autowired
-	public void setDataSource(DataSource dataSource) {
-	    jdbcTemplate = new JdbcTemplate(dataSource);
-	}
-	
-	/*void mostraNadador(String nomNadador) {
-		try {
-            log.info(jdbcTemplate.queryForObject("SELECT * from Nadador WHERE nom=?",
-                    new NadadorRowMapper(), nomNadador).toString());
-        }
-        catch(EmptyResultDataAccessException e) {
-            log.info("El nadador " + nomNadador  + " no es troba a la base de dades");
-        }
-	}*/
-	
-	// Demana a Spring que ens proporcione una instància de NadadorDAO
-	// mitjanjant injecció de dependencies
-	
-	@Autowired
-	TrabajadorSocialDao TrabajdorSocialDao;
-/*
-	void provaNadadorDao() {
-	  log.info("Provant NadadorDao");
-	  log.info("Tots els nadadors");
-
-	  for (Nadador n: nadadorDao.getNadadors()) {
-	     log.info(n.toString());
-	  }
-
-	  log.info("Dades de Gemma Mengual");
-	  Nadador n = nadadorDao.getNadador("Gemma Mengual");
-	  log.info(n.toString());
-
-	  Nadador aEdo = new Nadador();
-	  aEdo.setNom("Ariadna Edo");
-	  aEdo.setEdat(21);
-	  log.info("Nou: Ariadna Edo");
-	  nadadorDao.addNadador(aEdo);
-	  log.info(nadadorDao.getNadador("Ariadna Edo").toString());
-
-	  log.info("Actualitzat: Ariadna Edo");
-	  aEdo.setPais("Espanya");
-	  aEdo.setGenere("Femení");
-	  nadadorDao.updateNadador(aEdo);
-
-	  log.info("Esborrat: Ariadna Edo");
-	  nadadorDao.deleteNadador(aEdo);
-	  if (nadadorDao.getNadador("Ariadna Edo") == null) {
-	     log.info("Esborrada correctament");
-	  }
-	}*/
 }
