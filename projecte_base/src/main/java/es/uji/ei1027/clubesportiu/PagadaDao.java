@@ -1,0 +1,52 @@
+package es.uji.ei1027.clubesportiu;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+public class PagadaDao {
+	   private JdbcTemplate jdbcTemplate;
+
+	   public void setDataSource(DataSource dataSource) {
+	       jdbcTemplate = new JdbcTemplate(dataSource);
+	   }
+
+	   void addPagada(Pagada pagada) {
+	       jdbcTemplate.update("INSERT INTO Pagadas values(?,?)", 
+	    		   pagada.getNumero_peticion(), pagada.getNumero_factura());
+	   }
+
+	   void deletePagada(Pagada pagada) {
+	       jdbcTemplate.update("DELETE FROM Pagadas WHERE numero_peticion=?",pagada.getNumero_peticion());
+	   }
+
+	   
+		void updatePagadas(Pagada pagada) {
+			jdbcTemplate.update("UPDATE Pagadas set numero_peticion=?, numero_factura=?",
+					pagada.getNumero_peticion(), pagada.getNumero_factura());
+		}
+	   
+		
+		Pagada getPagada(String dni) {
+			try {
+				return jdbcTemplate.queryForObject("SELECT * FROM Pagadas where dni=?", new PagadaRowMapper(), dni);
+			} catch (EmptyResultDataAccessException e) {
+				return null;
+			}
+		}
+		
+	  
+	   List<Pagada> getPagadas() {
+	       try {
+	           return jdbcTemplate.query("SELECT * from PersonaMayor", new PagadaRowMapper());
+	       }
+	       catch(EmptyResultDataAccessException e) {
+	           return new ArrayList<Pagada>();
+	       }
+	   }
+
+}
