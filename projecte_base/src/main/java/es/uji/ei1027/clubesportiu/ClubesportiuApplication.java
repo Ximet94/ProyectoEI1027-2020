@@ -28,12 +28,12 @@ public class ClubesportiuApplication implements CommandLineRunner {
         // * En les propietats "user" i "password" has de posar el teu usuari i contrasenya
         Connection connection = null;
         try {
-            String url = "jdbc:postgresql://db-aules.uji.es/BD";
+            String url = "jdbc:postgresql://db-aules.uji.es:5432/ei102719cp";
             Properties props = new Properties();
-            props.setProperty("user", "alxxxxxx");
-            props.setProperty("password", ".......");
-            props.setProperty("ssl", "true");
-            props.setProperty("sslfactory", "org.postgresql.ssl.NonValidatingFactory");
+            props.setProperty("user", "ei102719cp");
+            props.setProperty("password","ei102719cp");
+            //props.setProperty("ssl", "true");
+            //props.setProperty("sslfactory", "org.postgresql.ssl.NonValidatingFactory");
             connection = DriverManager.getConnection(url, props);
         } catch (SQLException e) {
             System.out.println("Error de connexió");

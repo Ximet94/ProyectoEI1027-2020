@@ -1,4 +1,4 @@
-package es.uji.ei1027.clubesportiu;
+package model;
 
 public class TrabajadorSocial {
    private String usuarioCAS;

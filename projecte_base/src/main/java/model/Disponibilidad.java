@@ -1,4 +1,4 @@
-package es.uji.ei1027.clubesportiu;
+package model;
 
 import java.sql.Time;
 import java.util.Date;

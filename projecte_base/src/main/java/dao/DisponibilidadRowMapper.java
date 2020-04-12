@@ -1,4 +1,4 @@
-package es.uji.ei1027.clubesportiu;
+package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,6 +6,8 @@ import java.sql.Time;
 import java.util.Date;
 
 import org.springframework.jdbc.core.RowMapper;
+
+import model.Disponibilidad;
 
 public class DisponibilidadRowMapper implements RowMapper<Disponibilidad> {
 

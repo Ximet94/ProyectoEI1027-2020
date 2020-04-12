@@ -1,6 +1,8 @@
-package es.uji.ei1027.clubesportiu;
+package dao;
 
 import org.springframework.jdbc.core.RowMapper;
+
+import model.Peticion;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,9 +1,11 @@
-package es.uji.ei1027.clubesportiu;
+package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+
+import model.Pagada;
 
 public class PagadaRowMapper implements RowMapper<Pagada> {
 

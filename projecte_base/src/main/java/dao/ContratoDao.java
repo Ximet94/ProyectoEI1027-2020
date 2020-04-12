@@ -1,4 +1,4 @@
-package es.uji.ei1027.clubesportiu;
+package dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,8 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import model.Contrato;
 
 public class ContratoDao {
 	   private JdbcTemplate jdbcTemplate;
