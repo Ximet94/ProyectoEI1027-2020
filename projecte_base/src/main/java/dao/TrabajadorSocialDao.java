@@ -41,7 +41,7 @@ public class TrabajadorSocialDao {
 	}
    
 	/* Obtiene el trabajdor por su usuarioCAS. Devuelve null si no existe. */
-	TrabajadorSocial getTrabajadorSocial(String usuarioCAS) {
+	public TrabajadorSocial getTrabajadorSocial(String usuarioCAS) {
 		try {
 			return jdbcTemplate.queryForObject("SELECT * FROM Trabajador where usuarioCAS=?", new TrabajadorSocialRowMapper(), usuarioCAS);
 		} catch (EmptyResultDataAccessException e) {
@@ -50,7 +50,7 @@ public class TrabajadorSocialDao {
 	}
 	
    /* Obtiene todos los trabajadores sociales.*/
-   List<TrabajadorSocial> getTrabajadoresSociales() {
+   public List<TrabajadorSocial> getTrabajadoresSociales() {
        try {
            return jdbcTemplate.query("SELECT * from Trabajador", new TrabajadorSocialRowMapper());
        }

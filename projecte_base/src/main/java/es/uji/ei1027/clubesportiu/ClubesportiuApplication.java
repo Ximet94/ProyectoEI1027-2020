@@ -2,17 +2,19 @@ package es.uji.ei1027.clubesportiu;
 
 import java.sql.*;
 import java.util.Properties;
-
+import java.util.logging.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class ClubesportiuApplication implements CommandLineRunner {
 
+	private static final Logger log = Logger.getLogger(ClubesportiuApplication .class.getName());
+	
     public static void main(String[] argv) {
-
         // En primer lloc, ens assegurem que el driver de PostgreSQL està disponible
         System.out.println("Prova de connexió a PostgreSQL amb JDBC");
+        
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -32,8 +34,6 @@ public class ClubesportiuApplication implements CommandLineRunner {
             Properties props = new Properties();
             props.setProperty("user", "ei102719cp");
             props.setProperty("password","ei102719cp");
-            //props.setProperty("ssl", "true");
-            //props.setProperty("sslfactory", "org.postgresql.ssl.NonValidatingFactory");
             connection = DriverManager.getConnection(url, props);
         } catch (SQLException e) {
             System.out.println("Error de connexió");
@@ -54,7 +54,7 @@ public class ClubesportiuApplication implements CommandLineRunner {
             System.out.println("Executant la consulta...");
             statement = connection.createStatement();
 
-            String sql = "SELECT * FROM Nadador";
+            String sql = "SELECT * FROM trabajador";
 
             resultSet = statement.executeQuery(sql);
             System.out.println("Dades trobades...");
@@ -62,13 +62,14 @@ public class ClubesportiuApplication implements CommandLineRunner {
             if (resultSet != null) { // Si result == null no hi ha dades que mostrar
                 while (resultSet.next()) // amb este while processem totes les tuples que hi ha en el ResultSet
                 {   /* Per a cada columna hem de buscar la seua dada:*/
-                    System.out.println("Nom del nadador: " + resultSet.getString(1));  //en este cas accedim per número de columna
-                    System.out.println("Num. federat: " + resultSet.getString(2));
-                    System.out.println("País del nadador: " + resultSet.getString(3));
-                    System.out.println("Edat del nadador: " + resultSet.getInt(4));
-                    System.out.println("Sexe del nadador: " + resultSet.getString(5));
+                    System.out.println("Nombre del usuarioCAS: " + resultSet.getString(1));  //en este cas accedim per número de columna
+                    System.out.println("Nombre del usuario: " + resultSet.getString(2));
+                    System.out.println("Password del usuario " + resultSet.getString(3));
+                    System.out.println("Teléfono del usuario" + resultSet.getInt(4));
+                    System.out.println("Email del usuario" + resultSet.getString(5));
                     System.out.println("----------------------------------");
                 }
+                //while(true) {}
             }
         }
         catch (SQLException e) {
@@ -100,7 +101,7 @@ public class ClubesportiuApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Apéndice de método generado automáticamente
-		
+		log.info("Ací va el meu codi");
 	}
 
 }

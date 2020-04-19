@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title>EI1027</title>
+   <meta charset="UTF-8"/>
+   <!-- Afegim una fulla d’estil (Bootstrap) -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+	<h1>Prova del controlador</h1>
+	<p><b>Trabajador Social: </b> <span th:text="$(ts.usuarioCAS)"> </span</p>
+	<p><b>Nombre: </b> <span th:text="$(ts.nombre)"> </span</p>
+	<p><b>Password: </b> <span th:text="$(ts.pwd)"> </span</p>
+	<p><b>Telefono: </b> <span th:text="$(ts.telefono)"> </span</p>
+	<p><b>Email: </b> <span th:text="$(ts.email)"> </span</p>
+	
+	<a href="/">Tornar</a>
+</body>
+</html>
