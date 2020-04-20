@@ -1,8 +1,8 @@
-package dao;
+package es.uji.ei1027.clubesportiu.dao;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import model.Factura;
+import es.uji.ei1027.clubesportiu.model.Factura;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

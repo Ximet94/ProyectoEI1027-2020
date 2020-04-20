@@ -1,4 +1,4 @@
-package dao;
+package es.uji.ei1027.clubesportiu.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import model.Voluntario;
+import es.uji.ei1027.clubesportiu.model.Voluntario;
 
 public class VoluntarioDao {
 	   private JdbcTemplate jdbcTemplate;

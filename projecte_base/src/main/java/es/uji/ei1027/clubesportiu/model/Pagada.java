@@ -1,4 +1,4 @@
-package model;
+package es.uji.ei1027.clubesportiu.model;
 
 public class Pagada {
 	private int numero_peticion;
