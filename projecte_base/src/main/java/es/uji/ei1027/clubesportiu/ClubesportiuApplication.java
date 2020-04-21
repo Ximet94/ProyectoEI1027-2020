@@ -3,8 +3,10 @@ package es.uji.ei1027.clubesportiu;
 import java.sql.*;
 import java.util.Properties;
 import java.util.logging.Logger;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @SpringBootApplication
 public class ClubesportiuApplication implements CommandLineRunner {
@@ -12,18 +14,9 @@ public class ClubesportiuApplication implements CommandLineRunner {
 	private static final Logger log = Logger.getLogger(ClubesportiuApplication.class.getName());
     
 	public static void main(String[] args) {
-<<<<<<< HEAD
-		new SpringApplicationBuilder(ClubesportiuApplication.class).run(args);
-	}
-	private static final Logger log = Logger.getLogger(ClubesportiuApplication .class.getName());
-	
-    public static void main(String[] argv) {
-=======
 		 new SpringApplicationBuilder(ClubesportiuApplication.class).run(args);
->>>>>>> parent of 8934ac9... No funciona servidor
         // En primer lloc, ens assegurem que el driver de PostgreSQL està disponible
         System.out.println("Prova de connexió a PostgreSQL amb JDBC");
-        
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -78,7 +71,6 @@ public class ClubesportiuApplication implements CommandLineRunner {
                     System.out.println("Email del usuario" + resultSet.getString(5));
                     System.out.println("----------------------------------");
                 }
-                //while(true) {}
             }
         }
         catch (SQLException e) {
@@ -110,7 +102,7 @@ public class ClubesportiuApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Apéndice de método generado automáticamente
-		log.info("Ací va el meu codi");
+		
 	}
 
 }
