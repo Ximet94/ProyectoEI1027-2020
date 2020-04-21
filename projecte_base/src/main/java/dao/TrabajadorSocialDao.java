@@ -15,7 +15,7 @@ import java.util.List;
 @Repository // En Spring els DAOs van anotats amb @Repository
 public class TrabajadorSocialDao {
 
-   private static JdbcTemplate jdbcTemplate;
+   private JdbcTemplate jdbcTemplate;
 
    // Obté el jdbcTemplate a partir del Data Source
    @Autowired
@@ -41,7 +41,7 @@ public class TrabajadorSocialDao {
 	}
    
 	/* Obtiene el trabajdor por su usuarioCAS. Devuelve null si no existe. */
-	public static TrabajadorSocial getTrabajadorSocial(String usuarioCAS) {
+	public TrabajadorSocial getTrabajadorSocial(String usuarioCAS) {
 		try {
 			return jdbcTemplate.queryForObject("SELECT * FROM Trabajador where usuarioCAS=?", new TrabajadorSocialRowMapper(), usuarioCAS);
 		} catch (EmptyResultDataAccessException e) {

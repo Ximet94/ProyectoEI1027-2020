@@ -32,7 +32,7 @@ public class ProvaController {
 }*/
 
 @Controller
-/*@RequestMapping("/trabajadorSocial")*/
+@RequestMapping("/trabajadorSocial")
 public class TrabajadorSocialController {
 
    private TrabajadorSocialDao trabajadorDao;
@@ -40,13 +40,6 @@ public class TrabajadorSocialController {
    @Autowired
    public void setTrabajadorSocialDao(TrabajadorSocialDao trabajadorDao) {
        this.trabajadorDao=trabajadorDao;
-   }
-   
-   @RequestMapping("/provaTrabajador")
-   public String provaUnTrabajadorSocial(Model model) {
-      TrabajadorSocial ts = TrabajadorSocialDao.getTrabajadorSocial("PepeLu");
-      model.addAttribute("message", ts.toString());
-      return "prova_trabajadorsocial";
    }
 
    // Operacions: Crear, llistar, actualitzar, esborrar
