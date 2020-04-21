@@ -14,8 +14,7 @@ public class ClubesportiuApplication implements CommandLineRunner {
 	private static final Logger log = Logger.getLogger(ClubesportiuApplication.class.getName());
     
 	public static void main(String[] args) {
-		 new SpringApplicationBuilder(ClubesportiuApplication.class).run(args);
-        // En primer lloc, ens assegurem que el driver de PostgreSQL està disponible
+		new SpringApplicationBuilder(ClubesportiuApplication.class).run(args);
         System.out.println("Prova de connexió a PostgreSQL amb JDBC");
         try {
             Class.forName("org.postgresql.Driver");
@@ -32,11 +31,11 @@ public class ClubesportiuApplication implements CommandLineRunner {
         // * En les propietats "user" i "password" has de posar el teu usuari i contrasenya
         Connection connection = null;
         try {
-            String url = "jdbc:postgresql://db-aules.uji.es:5432/ei102719cp";
-            Properties props = new Properties();
-            props.setProperty("user", "ei102719cp");
-            props.setProperty("password","ei102719cp");
-            connection = DriverManager.getConnection(url, props);
+        	String url = "jdbc:postgresql://db-aules.uji.es:5432/ei102719cp";             
+        	Properties props = new Properties();             
+        	props.setProperty("user", "ei102719cp");             
+        	props.setProperty("password","ei102719cp");             
+        	connection = DriverManager.getConnection(url, props);
         } catch (SQLException e) {
             System.out.println("Error de connexió");
             e.printStackTrace();
