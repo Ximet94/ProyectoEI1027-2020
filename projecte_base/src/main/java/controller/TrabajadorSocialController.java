@@ -1,12 +1,12 @@
-package es.uji.ei1027.clubesportiu.controller;
+package controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller; 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import es.uji.ei1027.clubesportiu.dao.TrabajadorSocialDao;
-import es.uji.ei1027.clubesportiu.model.TrabajadorSocial;
+import dao.TrabajadorSocialDao;
+import model.TrabajadorSocial;
 
 /*@Controller
 @RequestMapping("/nadador")

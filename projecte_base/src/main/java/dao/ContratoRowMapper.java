@@ -1,4 +1,4 @@
-package es.uji.ei1027.clubesportiu.dao;
+package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,7 +6,7 @@ import java.util.Date;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import es.uji.ei1027.clubesportiu.model.Contrato;
+import model.Contrato;
 
 public class ContratoRowMapper implements RowMapper<Contrato> {
 	

@@ -1,4 +1,4 @@
-package es.uji.ei1027.clubesportiu.dao;
+package dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.sql.DataSource;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import es.uji.ei1027.clubesportiu.model.Pagada;
+import model.Pagada;
 
 public class PagadaDao {
 	  private JdbcTemplate jdbcTemplate;
