@@ -7,9 +7,6 @@ public class TrabajadorSocial {
    private String telefono;
    private String email;
 
-
-
-   
    public TrabajadorSocial(String usuarioCAS, String nombre, String pwd, String telefono, String email) {
 		super();
 		this.usuarioCAS = usuarioCAS;

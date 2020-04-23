@@ -7,9 +7,11 @@ import javax.sql.DataSource;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.clubesportiu.model.Pagada;
 
+@Repository
 public class PagadaDao {
 	  private JdbcTemplate jdbcTemplate;
 
