@@ -44,7 +44,7 @@ public class ContratoDao {
 			}
 		}
 		
-	   List<Contrato> getContratos() {
+	   public List<Contrato> getContratos() {
 	       try {
 	           return jdbcTemplate.query("SELECT * FROM Contrato", new ContratoRowMapper());
 	       }

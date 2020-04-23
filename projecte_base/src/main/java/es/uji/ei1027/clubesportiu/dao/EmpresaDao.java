@@ -42,7 +42,7 @@ public class EmpresaDao {
 			}
 		}
 		
-	   List<Empresa> getEmpresas() {
+	   public List<Empresa> getEmpresas() {
 	       try {
 	           return jdbcTemplate.query("SELECT * FROM Empresa", new EmpresaRowMapper());
 	       }

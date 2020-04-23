@@ -48,7 +48,7 @@ public class FacturaDao {
 	}
 	
    /* Obtiene todos los trabajadores sociales.*/
-   List<Factura> getFacturas() {
+  public List<Factura> getFacturas() {
        try {
            return jdbcTemplate.query("SELECT * from Factura", new FacturaRowMapper());
        }

@@ -53,7 +53,7 @@ public class PersonaMayorDao {
 	}
 	
   
-   List<PersonaMayor> getPersonasMayores() {
+   public List<PersonaMayor> getPersonasMayores() {
        try {
            return jdbcTemplate.query("SELECT * from PersonaMayor", new PersonaMayorRowMapper());
        }

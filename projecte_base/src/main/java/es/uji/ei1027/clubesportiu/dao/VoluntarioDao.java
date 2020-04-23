@@ -44,7 +44,7 @@ public class VoluntarioDao {
 			}
 		}
 		
-	   List<Voluntario> getVoluntarios() {
+	   public List<Voluntario> getVoluntarios() {
 	       try {
 	           return jdbcTemplate.query("SELECT * FROM Voluntario", new VoluntarioRowMapper());
 	       }

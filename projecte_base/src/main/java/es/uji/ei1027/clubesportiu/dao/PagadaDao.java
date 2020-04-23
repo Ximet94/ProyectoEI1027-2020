@@ -45,7 +45,7 @@ public class PagadaDao {
 	}
 
 	 
-	  List<Pagada> getPagadas() {
+	  public List<Pagada> getPagadas() {
 	      try {
 	          return jdbcTemplate.query("SELECT * from Pagadas", new PagadaRowMapper());
 	      }

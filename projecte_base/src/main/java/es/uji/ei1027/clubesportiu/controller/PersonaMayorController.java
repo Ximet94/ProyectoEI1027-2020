@@ -18,7 +18,7 @@ public class PersonaMayorController {
 
    @Autowired
    public void setPersonaMayorDao(PersonaMayorDao personaMayorDao) {
-       this.personaMayorDao=personaMayorDao;
+       this.personaMayorDao = personaMayorDao;
    }
    
    @RequestMapping("/prova")
@@ -33,6 +33,11 @@ public class PersonaMayorController {
 
    // Operacions: Crear, llistar, actualitzar, esborrar
    // ...
+	@RequestMapping("/list")
+	public String listPersonasMayores(Model model) {
+		model.addAttribute("personasMayores", personaMayorDao.getPersonasMayores());
+		return "personamayor/list";
+	}
    
    
 }

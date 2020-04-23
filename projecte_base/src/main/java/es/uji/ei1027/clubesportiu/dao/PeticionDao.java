@@ -54,9 +54,9 @@ public class PeticionDao {
 	}
 	
    
-   List<Peticion> getFacturas() {
+   public List<Peticion> getPeticiones() {
        try {
-           return jdbcTemplate.query("SELECT * from Factura", new PeticionRowMapper());
+           return jdbcTemplate.query("SELECT * from Peticion", new PeticionRowMapper());
        }
        catch(EmptyResultDataAccessException e) {
            return new ArrayList<Peticion>();

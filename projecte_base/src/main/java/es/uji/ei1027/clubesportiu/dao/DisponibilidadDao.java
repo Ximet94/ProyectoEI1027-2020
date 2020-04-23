@@ -43,7 +43,7 @@ public class DisponibilidadDao {
 			}
 		}
 		
-	   List<Disponibilidad> getDisponibilidades() {
+	   public List<Disponibilidad> getDisponibilidades() {
 	       try {
 	           return jdbcTemplate.query("SELECT * FROM Disponibilidad", new DisponibilidadRowMapper());
 	       }
