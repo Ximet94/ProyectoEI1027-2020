@@ -6,33 +6,49 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 </head>
 <body>
-   <h1>Lista de trabajadores sociales</h1>
+   <h1>Lista de personas mayores</h1>
    <table>
      <thead>
        <tr>
-         <th>usuarioCAS</th>
+         <th>DNI</th>
          <th>Nombre</th>
-         <th>Password</th>
+         <th>Apellidos</th>
+         <th>Fecha</th>
+         <th>Direccion</th>
          <th>Telefono</th>
+         <th>Numero de cuenta</th>  
          <th>Email</th>
+         <th>Contraseña</th>
+         <th>Fecha de creacion</th>
+         <th>Alergias</th>
+         <th>Enfermedades</th>
+         <th>UsuarioCAS</th>     
          <th></th>
          <th></th>
        </tr>
      </thead>
      <tbody>
-       <tr th:each="trabajador: ${trabajadores}">
-         <td th:text="${trabajador.usuarioCAS}"></td>
-         <td th:text="${trabajador.nombre}"></td>
-         <td th:text="${trabajador.pwd}"></td>
-         <td th:text="${trabajador.telefono}"></td>
-         <td th:text="${trabajador.email}"></td>
-         <td><a th:href="@{/trabajadorSocial/update/{usuarioCAS}(usuarioCAS=${trabajador.usuarioCAS})}">Edita</a>
+       <tr th:each="personaMayor: ${personasMayores}">
+         <td th:text="${personaMayor.dni}"></td>
+         <td th:text="${personaMayor.nombre}"></td>
+         <td th:text="${personaMayor.apellidos}"></td>
+         <td th:text="${personaMayor.fecha_ncto}"></td>
+         <td th:text="${personaMayor.direccion}"></td>
+         <td th:text="${personaMayor.telefono}"></td>
+         <td th:text="${personaMayor.numero_cuenta}"></td>
+         <td th:text="${personaMayor.email}"></td>
+         <td th:text="${personaMayor.userPwd}"></td>
+         <td th:text="${personaMayor.fecha_creacion}"></td>
+         <td th:text="${personaMayor.alergias}"></td>
+         <td th:text="${personaMayor.enfermedades}"></td>
+         <td th:text="${personaMayor.usuarioCAS}"></td>
+         <td><a th:href="@{/personaMayor/update/{dni}(dni=${personaMayor.dni})}">Edita</a>
          </td>
-         <td><a th:href="@{/trabajadorSocial/delete/{usuarioCAS}(usuarioCAS=${trabajador.usuarioCAS})}">Borra</a>
+         <td><a th:href="@{/personaMayor/delete/{dni}(dni=${personaMayor.dni})}">Borra</a>
          </td>
        </tr>
      </tbody>
    </table>
-   <a href="add">Anyade Trabajador Social</a>
+   <a href="add">Anyade Persona Mayor</a>
 </body>
 </html>

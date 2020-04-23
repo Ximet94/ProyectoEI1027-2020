@@ -6,33 +6,41 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 </head>
 <body>
-   <h1>Lista de trabajadores sociales</h1>
+   <h1>Lista de contratos</h1>
    <table>
      <thead>
        <tr>
-         <th>usuarioCAS</th>
-         <th>Nombre</th>
-         <th>Password</th>
-         <th>Telefono</th>
-         <th>Email</th>
+         <th>Número</th>
+         <th>Fecha de inicio</th>
+         <th>Fecha de fin</th>
+         <th>Descripción</th>
+         <th>Tipo de servicio</th>
+         <th>Cantidad de servicio</th>
+         <th>Unidades de medida</th>
+         <th>Precio unidad</th>
+         <th>CIF empresa</th>
          <th></th>
          <th></th>
        </tr>
      </thead>
      <tbody>
-       <tr th:each="trabajador: ${trabajadores}">
-         <td th:text="${trabajador.usuarioCAS}"></td>
-         <td th:text="${trabajador.nombre}"></td>
-         <td th:text="${trabajador.pwd}"></td>
-         <td th:text="${trabajador.telefono}"></td>
-         <td th:text="${trabajador.email}"></td>
-         <td><a th:href="@{/trabajadorSocial/update/{usuarioCAS}(usuarioCAS=${trabajador.usuarioCAS})}">Edita</a>
+       <tr th:each="contrato: ${contratos}">
+         <td th:text="${contrato.numero}"></td>
+         <td th:text="${contrato.fecha_inicio}"></td>
+         <td th:text="${contrato.fecha_fin}"></td>
+         <td th:text="${contrato.descripcion}"></td>
+         <td th:text="${contrato.tipo_servicio}"></td>
+         <td th:text="${contrato.cantidad_servicios}"></td>
+         <td th:text="${contrato.unidad_de_medida}"></td>
+         <td th:text="${contrato.precio_unidad}"></td>
+         <td th:text="${contrato.cif_empresa}"></td>
+         <td><a th:href="@{/contrato/update/{numero}(numero=${contrato.numero})}">Edita</a>
          </td>
-         <td><a th:href="@{/trabajadorSocial/delete/{usuarioCAS}(usuarioCAS=${trabajador.usuarioCAS})}">Borra</a>
+         <td><a th:href="@{/contrato/delete/{numero}(numero=${contrato.numero})}">Borra</a>
          </td>
        </tr>
      </tbody>
    </table>
-   <a href="add">Anyade Trabajador Social</a>
+   <a href="add">Anyade Contrato</a>
 </body>
 </html>

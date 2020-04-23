@@ -6,33 +6,45 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 </head>
 <body>
-   <h1>Lista de trabajadores sociales</h1>
+   <h1>Lista de peticiones</h1>
    <table>
      <thead>
        <tr>
-         <th>usuarioCAS</th>
-         <th>Nombre</th>
-         <th>Password</th>
-         <th>Telefono</th>
-         <th>Email</th>
+         <th>Numero</th>
+         <th>Tipo de servicio</th>
+         <th>Fecha de creacion</th>
+         <th>Estado</th>
+         <th>Fecha de aprobacion</th>
+         <th>Fecha de rechazo</th>
+         <th>Comentarios</th>
+         <th>Fecha de finalizacion</th>
+         <th>DNI</th>
+         <th>Numero factura</th>
+         <th>Numero Contrato</th>
          <th></th>
          <th></th>
        </tr>
      </thead>
      <tbody>
-       <tr th:each="trabajador: ${trabajadores}">
-         <td th:text="${trabajador.usuarioCAS}"></td>
-         <td th:text="${trabajador.nombre}"></td>
-         <td th:text="${trabajador.pwd}"></td>
-         <td th:text="${trabajador.telefono}"></td>
-         <td th:text="${trabajador.email}"></td>
-         <td><a th:href="@{/trabajadorSocial/update/{usuarioCAS}(usuarioCAS=${trabajador.usuarioCAS})}">Edita</a>
+       <tr th:each="peticion: ${peticiones}">
+         <td th:text="${peticion.numero}"></td>
+         <td th:text="${peticion.tipo_servicio}"></td>
+         <td th:text="${peticion.fecha_creacion}"></td>
+         <td th:text="${peticion.estado}"></td>
+         <td th:text="${peticion.fecha_aprobacion}"></td>
+         <td th:text="${peticion.fecha_rechazado}"></td>
+         <td th:text="${peticion.comentarios}"></td>
+         <td th:text="${peticion.fecha_finalizacion}"></td>
+         <td th:text="${peticion.dni_personaMayor}"></td>
+         <td th:text="${peticion.numero_factura}"></td>
+         <td th:text="${peticion.numero_contrato}"></td>
+         <td><a th:href="@{/peticion/update/{numero}(numero=${peticion.numero})}">Edita</a>
          </td>
-         <td><a th:href="@{/trabajadorSocial/delete/{usuarioCAS}(usuarioCAS=${trabajador.usuarioCAS})}">Borra</a>
+         <td><a th:href="@{/peticion/delete/{numero}(numero=${peticion.numero})}">Borra</a>
          </td>
        </tr>
      </tbody>
    </table>
-   <a href="add">Anyade Trabajador Social</a>
+   <a href="add">Anyade Peticion</a>
 </body>
 </html>

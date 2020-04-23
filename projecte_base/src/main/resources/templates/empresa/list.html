@@ -6,33 +6,37 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 </head>
 <body>
-   <h1>Lista de trabajadores sociales</h1>
+   <h1>Lista de empresas</h1>
    <table>
      <thead>
        <tr>
-         <th>usuarioCAS</th>
+         <th>CIF</th>
          <th>Nombre</th>
-         <th>Password</th>
-         <th>Telefono</th>
-         <th>Email</th>
+         <th>Direccion</th>
+         <th>Nombre de contacto</th>
+         <th>Telefono de contacto</th>
+         <th>Email de contacto</th>
+         <th>Tipo de servicio</th>
          <th></th>
          <th></th>
        </tr>
      </thead>
      <tbody>
-       <tr th:each="trabajador: ${trabajadores}">
-         <td th:text="${trabajador.usuarioCAS}"></td>
-         <td th:text="${trabajador.nombre}"></td>
-         <td th:text="${trabajador.pwd}"></td>
-         <td th:text="${trabajador.telefono}"></td>
-         <td th:text="${trabajador.email}"></td>
-         <td><a th:href="@{/trabajadorSocial/update/{usuarioCAS}(usuarioCAS=${trabajador.usuarioCAS})}">Edita</a>
+       <tr th:each="empresa: ${empresas}">
+         <td th:text="${empresa.cif}"></td>
+         <td th:text="${empresa.nombre}"></td>
+         <td th:text="${empresa.direccion}"></td>
+         <td th:text="${empresa.nombre_contacto}"></td>
+         <td th:text="${empresa.telefono_contacto}"></td>
+         <td th:text="${empresa.email_contacto}"></td>
+         <td th:text="${empresa.tipo_servicio}"></td>
+         <td><a th:href="@{/empresa/update/{cif}(cif=${empresa.cif})}">Edita</a>
          </td>
-         <td><a th:href="@{/trabajadorSocial/delete/{usuarioCAS}(usuarioCAS=${trabajador.usuarioCAS})}">Borra</a>
+         <td><a th:href="@{/empresa/delete/{cif}(cif=${empresa.cif})}">Borra</a>
          </td>
        </tr>
      </tbody>
    </table>
-   <a href="add">Anyade Trabajador Social</a>
+   <a href="add">Anyade Empresa</a>
 </body>
 </html>
