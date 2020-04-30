@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 <title>EI1027</title>
 <meta charset="UTF-8"/>
-<!-- Afegim una fulla d’estil (Bootstrap) -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 
 <link rel="stylesheet" type="text/css" href="/css/prueba.css"
                                     th:href="@{/css/prueba.css}"/>
 </head>
 <body>
-    <h1>Prova del controlador</h1>
-    <p>El missatge és: <i th:text="${message}"></i></p>
-    <a href="/">Tornar</a>
+	<h1>Gestión de los trabajadores sociales</h1>
+	<ul>
+		<li><a href="list">Listar todos los trabajadores</a></li>
+		
+	</ul>
 </body>
 </html>

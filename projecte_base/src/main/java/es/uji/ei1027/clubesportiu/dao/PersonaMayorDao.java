@@ -23,7 +23,7 @@ public class PersonaMayorDao {
        jdbcTemplate = new JdbcTemplate(dataSource);
    }
 
-   void addPersonaMayor(PersonaMayor persona) {
+   public void addPersonaMayor(PersonaMayor persona) {
        jdbcTemplate.update("INSERT INTO PersonaMayor values(?,?,?,?,?,?,?,?,?,?,?,?,?)", 
     		   persona.getDni(), persona.getNombre(), persona.getApellidos(), persona.getFecha_ncto(), persona.getDireccion(),
     		   persona.getTelefono(), persona.getNumero_cuenta(), persona.getEmail(), persona.getUserPwd(), 

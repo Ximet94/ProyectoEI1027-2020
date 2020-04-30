@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+<head>
+   <title>Crear un trabajador social</title>
+   <meta charset="UTF-8" />
+   <link rel="stylesheet"       
+     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+     
+<link rel="stylesheet" type="text/css" href="/css/prueba.css"
+                                    th:href="@{/css/prueba.css}"/>
+</head>
+<body>
+    <h2>Nuevo Trabajador Social</h2>
+    <form action="#" th:action="@{/trabajadorSocial/add}"
+                     th:object="${trabajador}" method="post">
+      <table>
+      	<tr>
+            <td><label>usuarioCAS</label></td>
+            <td><input type="text" th:field="*{usuarioCAS}" /></td>
+            <td th:if="${#fields.hasErrors('usuarioCAS')}" th:errors="*{usuarioCAS}" class="error"></td>
+        </tr>
+        <tr>
+            <td><label>Nombre</label></td>
+            <td><input type="text" th:field="*{nombre}" /></td>
+        </tr>
+        <tr>
+            <td><label>password</label></td>
+            <td><input type="password" th:field="*{pwd}" /></td>
+            <td th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}" class="error"></td>
+        </tr>
+        <tr>
+            <td><label>Telefono</label></td>
+            <td><input type="text" th:field="*{telefono}" /></td>
+            <td th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="error"></td>
+        </tr>
+        <tr>
+            <td><label>Email</label></td>
+            <td><input type="text" th:field="*{email}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Añadir trabajador social" /></td>
+        </tr>
+      </table>
+    </form>
+</body>
+</html>

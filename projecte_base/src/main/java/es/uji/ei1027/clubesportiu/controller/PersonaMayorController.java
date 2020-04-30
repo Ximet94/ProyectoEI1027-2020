@@ -21,15 +21,18 @@ public class PersonaMayorController {
        this.personaMayorDao = personaMayorDao;
    }
    
+   @RequestMapping("/indexPersonaMayor")
+   public String gestionPersonaMayor(Model model) {
+      return "personaMayor/indexPersonaMayor";
+   }
+   
    @RequestMapping("/prova")
    public String provaUnPersonaMayor(Model model) {
-	   System.out.println("probandooooooooo");
 	  PersonaMayor ps = PersonaMayorDao.getPersonaMayor("14578945B");
       model.addAttribute("message", ps.toString());
       //System.out.println(ts.toString());
       return "personamayor/prova";
    }
-
 
    // Operacions: Crear, llistar, actualitzar, esborrar
    // ...

@@ -24,18 +24,22 @@ public class TrabajadorSocialDao {
    }
 
    /*Anyade el trabajadorSocial a la BBDD */
-   void addTrabajadorSocial(TrabajadorSocial trabajador) {
+   public void addTrabajadorSocial(TrabajadorSocial trabajador) {
        jdbcTemplate.update("INSERT INTO Trabajador values(?,?,?,?,?)", trabajador.getUsuarioCAS(), trabajador.getNombre(), trabajador.getPwd(), 
     		   trabajador.getTelefono(), trabajador.getEmail());
    }
    /* Borra el trabajador Social de la base de dades */
-   void deleteTrabajadorSocial(TrabajadorSocial trabajador) {
+   public void deleteTrabajadorSocial(TrabajadorSocial trabajador) {
        jdbcTemplate.update("DELETE FROM Trabajador WHERE usuarioCAS=?",trabajador.getUsuarioCAS());
    }
 
+   /* Borra el trabajador Social de la base de dades */
+   public void deleteTrabajadorSocial(String usuarioCAS) {
+       jdbcTemplate.update("DELETE FROM Trabajador WHERE usuarioCAS=?",usuarioCAS);
+   }
    /* Actualiza los atributos del Trabajador
    */
-	void updateTrabajadorSocial(TrabajadorSocial trabajador) {
+	public void updateTrabajadorSocial(TrabajadorSocial trabajador) {
 		jdbcTemplate.update("UPDATE Trabajador set nombre=?, pwd=?, telefono=?, email=?",
 				trabajador.getNombre(), trabajador.getPwd(), trabajador.getTelefono(), trabajador.getEmail());
 	}
@@ -50,7 +54,7 @@ public class TrabajadorSocialDao {
 	}
 	
    /* Obtiene todos los trabajadores sociales.*/
-   public List<TrabajadorSocial> getTrabajadoresSociales() {
+   public static List<TrabajadorSocial> getTrabajadoresSociales() {
        try {
            return jdbcTemplate.query("SELECT * from Trabajador", new TrabajadorSocialRowMapper());
        }

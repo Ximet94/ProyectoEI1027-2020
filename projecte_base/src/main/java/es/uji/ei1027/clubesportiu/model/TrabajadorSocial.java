@@ -1,6 +1,6 @@
 package es.uji.ei1027.clubesportiu.model;
 
-public class TrabajadorSocial {
+public class TrabajadorSocial implements Comparable<TrabajadorSocial>{
    private String usuarioCAS;
    private String nombre;
    private String pwd;
@@ -64,6 +64,12 @@ public class TrabajadorSocial {
 	public String toString() {
 		return "TrabajadorSocial [usuarioCAS=" + usuarioCAS + ", nombre=" + nombre + ", pwd=" + pwd + ", telefono="
 				+ telefono + ", email=" + email + "]";
+	}
+
+	@Override
+	public int compareTo(TrabajadorSocial o) {
+		//Ordenamos por usuarioCAS
+		return this.getUsuarioCAS().compareTo(o.getUsuarioCAS());
 	}
 
 }
