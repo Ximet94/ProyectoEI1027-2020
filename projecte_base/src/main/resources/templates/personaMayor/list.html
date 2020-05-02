@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"> ①
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
    <title>Gestionar Personas Mayores</title>
    <meta charset="UTF-8" />
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+   
+<link rel="stylesheet" type="text/css" href="/css/prueba.css"
+                                    th:href="@{/css/prueba.css}"/>
 </head>
 <body>
    <h1>Lista de personas mayores</h1>
-   <table>
+    
+   <table class="table table-striped table-bordered" >
      <thead>
        <tr>
          <th>DNI</th>
          <th>Nombre</th>
          <th>Apellidos</th>
-         <th>Fecha</th>
+         <th>Fecha de nacimiento</th>
          <th>Direccion</th>
          <th>Telefono</th>
          <th>Numero de cuenta</th>  
          <th>Email</th>
-         <th>Contraseña</th>
          <th>Fecha de creacion</th>
          <th>Alergias</th>
          <th>Enfermedades</th>
@@ -28,7 +31,7 @@
        </tr>
      </thead>
      <tbody>
-       <tr th:each="personaMayor: ${personasMayores}">
+       <tr th:each="personaMayor: ${#lists.sort(personas)}">
          <td th:text="${personaMayor.dni}"></td>
          <td th:text="${personaMayor.nombre}"></td>
          <td th:text="${personaMayor.apellidos}"></td>
@@ -37,18 +40,25 @@
          <td th:text="${personaMayor.telefono}"></td>
          <td th:text="${personaMayor.numero_cuenta}"></td>
          <td th:text="${personaMayor.email}"></td>
-         <td th:text="${personaMayor.userPwd}"></td>
          <td th:text="${personaMayor.fecha_creacion}"></td>
          <td th:text="${personaMayor.alergias}"></td>
          <td th:text="${personaMayor.enfermedades}"></td>
          <td th:text="${personaMayor.usuarioCAS}"></td>
-         <td><a th:href="@{/personaMayor/update/{dni}(dni=${personaMayor.dni})}">Edita</a>
+         <td>
+         	<button type="button" class="btn btn-primary">
+         	<a th:href="@{/personaMayor/update/{dni}(dni=${personaMayor.dni})}"style="color:white">Edita</a>
+         	</button>
          </td>
-         <td><a th:href="@{/personaMayor/delete/{dni}(dni=${personaMayor.dni})}">Borra</a>
+         <td>
+         	<button type="button" class="btn btn-danger">
+         		<a th:href="@{/personaMayor/delete/{dni}(dni=${personaMayor.dni})}"style="color:white">Borra</a>
+         	</button>
          </td>
        </tr>
      </tbody>
    </table>
-   <a href="add">Anyade Persona Mayor</a>
+   <button type="button" class="btn btn-success">
+   		<a href="add" style="color:white">Añade Persona Mayor</a>
+   </button>
 </body>
 </html>

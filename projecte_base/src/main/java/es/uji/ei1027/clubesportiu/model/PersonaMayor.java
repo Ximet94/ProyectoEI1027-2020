@@ -2,17 +2,19 @@ package es.uji.ei1027.clubesportiu.model;
 
 import java.util.Date;
 
-public class PersonaMayor {
+import org.springframework.format.annotation.DateTimeFormat;
+
+public class PersonaMayor implements Comparable<PersonaMayor>{
    private String dni;
    private String nombre;
    private String apellidos;
-   private Date fecha_ncto;
+   @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) private Date fecha_ncto;
    private String direccion;
    private String telefono;
    private String numero_cuenta;
    private String email;
    private String userPwd;
-   private Date fecha_creacion;
+   @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) private Date fecha_creacion;
    private String alergias;
    private String enfermedades;
    private String usuarioCAS;
@@ -150,6 +152,12 @@ public class PersonaMayor {
 				+ fecha_ncto + ", direccion=" + direccion + ", telefono=" + telefono + ", numero_cuenta="
 				+ numero_cuenta + ", email=" + email + ", fecha_creacion=" + fecha_creacion + ", alergias=" + alergias
 				+ ", enfermedades=" + enfermedades + ", usuarioCAS=" + usuarioCAS + "]";
+	}
+
+	@Override
+	public int compareTo(PersonaMayor o) {
+		// TODO Apéndice de método generado automáticamente
+		return this.getNombre().compareTo(o.getNombre());
 	}
 
 }

@@ -1,6 +1,6 @@
 package es.uji.ei1027.clubesportiu.model;
 
-public class Empresa {
+public class Empresa implements Comparable<Empresa>{
 	private String cif;
 	private String nombre;
 	private String direccion;
@@ -69,5 +69,10 @@ public class Empresa {
 		return "Empresa [cif=" + cif + ", nombre=" + nombre + ", direccion=" + direccion + ", nombre_contacto="
 				+ nombre_contacto + ", telefono_contacto=" + telefono_contacto + ", email_contacto=" + email_contacto
 				+ ", tipo_servicio=" + tipo_servicio + "]";
+	}
+	@Override
+	public int compareTo(Empresa o) {
+		// TODO Apéndice de método generado automáticamente
+		return this.getCif().compareTo(o.getCif());
 	}
 }

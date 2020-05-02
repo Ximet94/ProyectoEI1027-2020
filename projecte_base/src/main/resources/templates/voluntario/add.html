@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+<head>
+   <title>Crear un voluntario</title>
+   <meta charset="UTF-8" />
+   <link rel="stylesheet"       
+     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+     
+<link rel="stylesheet" type="text/css" href="/css/prueba.css"
+                                    th:href="@{/css/prueba.css}"/>
+</head>
+<body>
+    <h2>Nuevo Voluntario</h2>
+    <form action="#" th:action="@{/voluntario/add}"
+                     th:object="${voluntario}" method="post">
+      <table>
+      	<tr>
+            <td><label>Usuario</label></td>
+            <td><input type="text" th:field="*{usuario}" /></td>
+            <td th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}" class="error"></td>
+        </tr>
+        <tr>
+            <td><label>Nombre</label></td>
+            <td><input type="text" th:field="*{nombre}" /></td>
+        </tr>
+        <tr>
+            <td><label>password</label></td>
+            <td><input type="password" th:field="*{pwd}" /></td>
+            <td th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}" class="error"></td>
+        </tr>
+        <tr>
+            <td><label>Telefono</label></td>
+            <td><input type="text" th:field="*{telefono}" /></td>
+        </tr>
+        <tr>
+            <td><label>Email</label></td>
+            <td><input type="text" th:field="*{email}" /></td>
+        </tr>
+        <tr>
+            <td><label>Hobbies</label></td>
+            <td><input type="text" th:field="*{hobbies}" /></td>
+        </tr>
+        <tr>
+            <td><label>Fecha de nacimiento</label></td>
+            <td><input type="date" th:field="*{fecha_ncto}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Añadir voluntario" /></td>
+        </tr>
+      </table>
+    </form>
+</body>
+</html>

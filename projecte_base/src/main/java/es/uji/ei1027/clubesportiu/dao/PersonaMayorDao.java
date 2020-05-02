@@ -30,12 +30,17 @@ public class PersonaMayorDao {
     		   persona.getFecha_creacion(), persona.getAlergias(), persona.getEnfermedades(), persona.getUsuarioCAS());
    }
 
-   void deletePersonaMayor(PersonaMayor persona) {
+   public void deletePersonaMayor(PersonaMayor persona) {
        jdbcTemplate.update("DELETE FROM PersonaMayor WHERE dni=?",persona.getDni());
    }
+   
+   public static void deletePersonaMayor(String dni) {
+       jdbcTemplate.update("DELETE FROM PersonaMayor WHERE dni=?",dni);
+   }
+
 
    
-	void updatePersonaMayor(PersonaMayor persona) {
+	public static void updatePersonaMayor(PersonaMayor persona) {
 		jdbcTemplate.update("UPDATE PersonaMayor set nombre=?, apellidos=?, fecha_ncto=?, direccion=?, telefono=?, numero_cuenta=?,"
 				+ "email=?, userPwd=?, fecha_creacion=?, alergias=?, enfermedades=?, usuarioCAS",
 				 persona.getNombre(), persona.getApellidos(), persona.getFecha_ncto(), persona.getDireccion(),
@@ -53,7 +58,7 @@ public class PersonaMayorDao {
 	}
 	
   
-   public List<PersonaMayor> getPersonasMayores() {
+   public static List<PersonaMayor> getPersonasMayores() {
        try {
            return jdbcTemplate.query("SELECT * from PersonaMayor", new PersonaMayorRowMapper());
        }

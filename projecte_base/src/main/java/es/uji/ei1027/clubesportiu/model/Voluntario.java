@@ -2,17 +2,19 @@ package es.uji.ei1027.clubesportiu.model;
 
 import java.util.Date;
 
-public class Voluntario {
+import org.springframework.format.annotation.DateTimeFormat;
+
+public class Voluntario implements Comparable<Voluntario> {
 	private String usuario;
 	private String pwd;
 	private String nombre;
 	private String telefono;
 	private String email;
 	private String hobbies;
-	private Date fecha_aplicacion;
-	private Date fecha_aceptacion;
+	@DateTimeFormat(iso=DateTimeFormat.ISO.DATE)  private Date fecha_aplicacion;
+	@DateTimeFormat(iso=DateTimeFormat.ISO.DATE)  private Date fecha_aceptacion;
 	private String estado;
-	private Date fecha_ncto;
+	@DateTimeFormat(iso=DateTimeFormat.ISO.DATE)  private Date fecha_ncto;
 	
 	
 	public Voluntario() {
@@ -142,6 +144,13 @@ public class Voluntario {
 				+ ", email=" + email + ", hobbies=" + hobbies + ", fecha_aplicacion=" + fecha_aplicacion
 				+ ", fecha_aceptacion=" + fecha_aceptacion + ", estado=" + estado + ", fecha_ncto=" + fecha_ncto
 				+ "]";
+	}
+
+
+	@Override
+	public int compareTo(Voluntario o) {
+		// TODO Apéndice de método generado automáticamente
+		return this.getUsuario().compareTo(o.getUsuario());
 	}
 }
 

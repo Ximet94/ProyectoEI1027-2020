@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+<head>
+   <title>Crear un trabajador social</title>
+   <meta charset="UTF-8" />
+   <link rel="stylesheet"       
+     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+     
+<link rel="stylesheet" type="text/css" href="/css/prueba.css"
+                                    th:href="@{/css/prueba.css}"/>
+</head>
+<body>
+    <h2>Nueva Persona mayor</h2>
+    <form action="#" th:action="@{/personaMayor/add}"
+                     th:object="${persona}" method="post">
+      <table>
+      	<tr>
+            <td><label>DNI</label></td>
+            <td><input type="text" th:field="*{dni}" /></td>
+            <td th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}" class="error"></td>
+        </tr>
+        <tr>
+            <td><label>Nombre</label></td>
+            <td><input type="text" th:field="*{nombre}" /></td>
+        </tr>
+        <tr>
+            <td><label>Password</label></td>
+            <td><input type="password" th:field="*{userPwd}" /></td>
+            <td th:if="${#fields.hasErrors('userPwd')}" th:errors="*{userPwd}" class="error"></td>
+        </tr>
+        <tr>
+            <td><label>Apellidos</label></td>
+            <td><input type="text" th:field="*{apellidos}" /></td>
+        </tr>
+        
+        <tr>
+            <td><label>Fecha de nacimiento</label></td>
+            <td><input type="date" th:field="*{fecha_ncto}"/></td>
+        </tr>
+        <tr>
+            <td><label>Dirección</label></td>
+            <td><input type="text" th:field="*{direccion}" /></td>
+        </tr>
+        <tr>
+            <td><label>Teléfono</label></td>
+            <td><input type="text" th:field="*{telefono}" /></td>
+             <td th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="error"></td>
+        </tr>
+        <tr>
+            <td><label>Número de cuenta</label></td>
+            <td><input type="text" th:field="*{numero_cuenta}" /></td>
+        </tr>
+        <tr>
+            <td><label>Email</label></td>
+            <td><input type="text" th:field="*{email}" /></td>
+        </tr>
+        <tr>
+            <td><label>Fecha de creación</label></td>
+            <td><input type="date" th:field="*{email}" /></td>
+        </tr>
+        <tr>
+            <td><label>Alergias</label></td>
+            <td><input type="text" th:field="*{alergias}" /></td>
+        </tr>
+        <tr>
+            <td><label>Enfermedades</label></td>
+            <td><input type="text" th:field="*{enfermedades}" /></td>
+        </tr>
+        
+        <tr>
+            <td colspan="2"><input type="submit" value="Añadir trabajador social" /></td>
+        </tr>
+      </table>
+    </form>
+</body>
+</html>

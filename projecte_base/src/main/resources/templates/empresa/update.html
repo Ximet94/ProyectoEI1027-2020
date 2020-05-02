@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+<head>
+   <title>Crear una empresa</title>
+   <meta charset="UTF-8" />
+   <link rel="stylesheet"       
+     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+     
+<link rel="stylesheet" type="text/css" href="/css/prueba.css"
+                                    th:href="@{/css/prueba.css}"/>
+</head>
+<body>
+    <h2>Nueva Empresa</h2>
+    <form action="#" th:action="@{/empresa/add}"
+                     th:object="${empresa}" method="post">
+      <table>
+      	<tr>
+            <td><label>CIF</label></td>
+            <td><input type="text" th:field="*{cif}" /></td>
+            <td th:if="${#fields.hasErrors('cif')}" th:errors="*{cif}" class="error"></td>
+        </tr>
+        <tr>
+            <td><label>Nombre</label></td>
+            <td><input type="text" th:field="*{nombre}" /></td>
+        </tr>
+        <tr>
+            <td><label>Dirección</label></td>
+            <td><input type="text" th:field="*{direccion}" /></td>
+        </tr>
+        <tr>
+            <td><label>Nombre del Contacto</label></td>
+            <td><input type="text" th:field="*{nombre_contacto}" /></td>
+        </tr>
+        <tr>
+            <td><label>Teléfono de Contacto</label></td>
+            <td><input type="text" th:field="*{telefono_contacto}" /></td>
+        </tr>
+        <tr>
+            <td><label>Email del Contacto</label></td>
+            <td><input type="text" th:field="*{email_contacto}" /></td>
+        </tr>
+        <tr>
+            <td><label>Tipo del servicio</label></td>
+            <td>
+			<select class="form_control" type="text" th:field="*{tipo_servicio}">
+				<option value="No seleccionado">Selecciona el tipo de servicio</option>
+				<option value="comida">Comida</option>
+				<option value="santario">Sanitario</option>
+				<option value="limpieza">Limpieza</option>
+			</select>
+			</td>
+        </tr>
+        
+        <tr>
+            <td colspan="2"><input type="submit" value="Añadir Empresa" /></td>
+        </tr>
+      </table>
+    </form>
+</body>
+</html>
