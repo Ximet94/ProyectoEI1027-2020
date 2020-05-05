@@ -33,7 +33,12 @@ public class Voluntario implements Comparable<Voluntario> {
 		this.hobbies = hobbies;
 		this.fecha_aplicacion = fecha_aplicacion;
 		this.fecha_aceptacion = fecha_aceptacion;
-		this.estado = estado;
+		if(estado==null) {
+			this.estado="pendiente";
+		}
+		else {
+			this.estado = estado;
+		}
 		this.fecha_ncto = fecha_ncto;
 	}
 

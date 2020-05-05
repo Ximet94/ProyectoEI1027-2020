@@ -2,8 +2,7 @@ package es.uji.ei1027.clubesportiu.controller;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import es.uji.ei1027.clubesportiu.model.TrabajadorSocial;
-import es.uji.ei1027.clubesportiu.model.Voluntario;;
+import es.uji.ei1027.clubesportiu.model.Voluntario;
 
 public class VoluntarioValidator implements Validator {
   @Override
