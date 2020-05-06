@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{fragmentos/base}">
 <head>
 <title>EI1027</title>
 <meta charset="UTF-8"/>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-
-<link rel="stylesheet" type="text/css" href="/css/prueba.css"
-                                    th:href="@{/css/prueba.css}"/>
 </head>
 <body>
+<div layout:fragment="content" style="margin: 1vw;"
 	<h1>Gestión de las personas mayores</h1>
 	<ul>
 		<li><a href="list">Listar todas las personas mayores</a></li>
+		<li><a href="peticion">Solicitud de Persona Mayor</a></li>
 	</ul>
+</div>
 </body>
 </html>

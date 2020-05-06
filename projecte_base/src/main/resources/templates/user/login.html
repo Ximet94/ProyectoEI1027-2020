@@ -5,14 +5,12 @@
 <head>
 <title>Login</title>
 <meta charset="UTF-8"/>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
-
-<link rel="stylesheet" type="text/css" href="/css/prueba.css"
-                                    th:href="@{/css/prueba.css}"/>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css"
+                                    th:href="@{/css/bootstrap.css}"/>
 
 </head>
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content" style="margin: 5vh;">
 	<h1>Acceso</h1>
 	<form action="#" th:action="@{/login}" 
 	      th:object="${user}" method="post">

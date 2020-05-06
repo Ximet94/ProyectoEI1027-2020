@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.clubesportiu.dao.PersonaMayorDao;
-import es.uji.ei1027.clubesportiu.dao.TrabajadorSocialDao;
 import es.uji.ei1027.clubesportiu.model.PersonaMayor;
-import es.uji.ei1027.clubesportiu.model.TrabajadorSocial;
+import es.uji.ei1027.clubesportiu.dao.PeticionDao;
+import es.uji.ei1027.clubesportiu.model.Peticion;
 
 @Controller
 @RequestMapping("/personaMayor")
@@ -24,6 +24,8 @@ public class PersonaMayorController {
 
 	@Autowired
    PersonaMayorDao personaMayorDao;
+	@Autowired
+	PeticionDao PeticionDao;
 
    @Autowired
    public void setPersonaMayorDao(PersonaMayorDao personaMayorDao) {
@@ -87,4 +89,11 @@ public class PersonaMayorController {
 	  PersonaMayorDao.deletePersonaMayor(dni);
          return "redirect:../list"; 
 	}
+  
+  @RequestMapping(value="/peticion")
+	public String solicitud(Model model) {
+		model.addAttribute("peticion", new Peticion());
+		return "peticion/add";
+	}
+  
 }
