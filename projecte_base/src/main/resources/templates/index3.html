@@ -11,13 +11,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
-<body layout:fragment="content" style="    position: absolute;top: 12vw;left: 78vh;background-color: antiquewhite;">
-	<h1>EI1027 - Spring MVC</h1>
-	<h2>Bienvenido a nuestra página web</h2>
-	<div style="position: absolute;left: 14vh;top: 6vw;">
-		<button type="button" class="btn btn-primary btn-lg">
-		<a href="/entrada" style="color:white">
-			Entrar </a></button>
+<body>
+<div  layout:fragment="content" style="margin: 5vh;">
+	<div class="container" style="margin: 5vh;">
+  		<div class="row">
+    		<div class="col">
+    			<button type="button" class="btn btn-primary btn-lg">
+    			<a href="personaMayor/portada" style="color:white">
+    				Gestión de Personas mayores </a></button>
+    		</div>
+    		<div class="col">
+    			<button type="button" class="btn btn-primary btn-lg">Gestión de Trabajadores sociales</button>
+    		</div>
+    		<div class="col">
+    			<button type="button" class="btn btn-primary btn-lg">Gestión de Voluntarios</button>
+      			
+    		</div>
+    		<div class="col">
+    			<button type="button" class="btn btn-primary btn-lg">Gestión de Empresas</button>
+    		</div>
+ 	 	</div>	
 	</div>
+	
+</div>
 </body>
 </html>

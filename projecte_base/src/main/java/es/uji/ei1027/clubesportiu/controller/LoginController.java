@@ -62,7 +62,7 @@ public class LoginController {
 			String nextUrl = session.getAttribute("nextUrl").toString();
 			if(! nextUrl.equals("")) {
 				session.setAttribute("nextUrl", "");
-				return nextUrl;
+				return "redirect:" + nextUrl;
 			}
 		}
 		catch(Exception ex) {

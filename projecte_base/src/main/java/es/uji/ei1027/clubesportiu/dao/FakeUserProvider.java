@@ -33,6 +33,7 @@ public class FakeUserProvider implements UserDao {
 	 BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor(); 
 	 if (passwordEncryptor.checkPassword(password, user.getPassword())) {
 	 // Es deuria esborrar de manera segura el camp password abans de tornar-lo
+		 
 		 return user; 
         } 
 	 else {

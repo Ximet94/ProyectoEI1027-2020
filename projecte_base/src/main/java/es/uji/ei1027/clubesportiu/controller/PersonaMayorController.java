@@ -31,6 +31,16 @@ public class PersonaMayorController {
    public void setPersonaMayorDao(PersonaMayorDao personaMayorDao) {
        this.personaMayorDao = personaMayorDao;
    }
+   @RequestMapping("/portada")
+   public String getPortada(Model model) {
+      return "personaMayor/pruebaPersonaMayor";
+   }
+   
+   @RequestMapping("/login")
+   public String login(Model model) {
+      return "personaMayor/pruebaPersonaMayor";
+   }
+   
    
    @RequestMapping("/indexPersonaMayor")
    public String gestionPersonaMayor(Model model) {
