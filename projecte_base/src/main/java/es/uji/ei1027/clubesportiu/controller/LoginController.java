@@ -1,9 +1,5 @@
 package es.uji.ei1027.clubesportiu.controller;
 
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired; 
@@ -19,7 +15,6 @@ import org.springframework.validation.Validator;
 
 import es.uji.ei1027.clubesportiu.dao.UserDao; 
 import es.uji.ei1027.clubesportiu.model.UserDetails;
-import es.uji.ei1027.clubesportiu.model.Voluntario;
 
 class UserValidator implements Validator { 
 	@Override
@@ -28,14 +23,10 @@ class UserValidator implements Validator {
 	}
 	@Override 
 	public void validate(Object obj, Errors errors) {
-		UserDetails user= (UserDetails)obj;
-		 if (user.getUsername().trim().equals(""))
-		       errors.rejectValue("username", "obligatorio",
-		                          "Hay que introducir un valor");
-		 if(user.getPassword().trim().equals(""))
-			errors.rejectValue("password", "insuficiente", "La contraseña introducida es demasiado corta");
+	  // Exercici: Afegeix codi per comprovar que 
+         // l'usuari i la contrasenya no estiguen buits 
+         // ...
 	}
-	
 }
 
 @Controller
@@ -43,8 +34,14 @@ public class LoginController {
 	@Autowired
 	private UserDao userDao;
 
-	@RequestMapping("/login")
-	public String login(Model model) {
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String displayLogin(Model model) {
+		model.addAttribute("user", new UserDetails());
+		return "index3";
+	}
+	
+	@RequestMapping(value = "/entrada", method = RequestMethod.GET)
+	public String displayLogin2(Model model) {
 		model.addAttribute("user", new UserDetails());
 		return "login";
 	}
@@ -54,7 +51,6 @@ public class LoginController {
 				BindingResult bindingResult, HttpSession session) {
 		UserValidator userValidator = new UserValidator(); 
 		userValidator.validate(user, bindingResult); 
-		
 		if (bindingResult.hasErrors()) {
 			return "login";
 		}

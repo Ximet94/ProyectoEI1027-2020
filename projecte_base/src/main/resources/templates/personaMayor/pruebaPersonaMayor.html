@@ -21,29 +21,83 @@
 <div  layout:fragment="content" style="margin: 5vh;">
 	<div class="container" style="margin: 6vh;">
 		<div class="row">
-			<div class="col" style="    background-color: #f1f1f1;">
+			<div class="col" style="    background-color: #f1f1f1;max-height: 9vw;padding: 1vw">
 		    	<h1> Inicio de sesión </h1>
-					<p>
-					   	<label>Nombre de usuario:</label>
-			            <input type="text"/>
-					</p>
-					<p>
-					   	<label>Contraseña:</label>
-			            <input  type="password"/>
-					</p>		
-						<input type="submit" value="Acceder" />
+					<form action="#" th:action="@{/login}" th:object="${user}" method="post">
+						<p>
+						   	<label>Nombre de usuario:</label>
+				            <input class="form_control" type="text" th:field="*{username}"/>
+				            
+						</p>
+						<p>
+						   	<label>Contraseña:</label>
+				            <input class="form_control" type="password" th:field="*{password}"/>
+				            
+						</p>		
+							<button type="submit" class="btn btn-primary btn-sm">Acceder</button>
+					</form>
 		    </div>
-		    <div class="col" style="    background-color: #f1f1f1;    margin-left: 25vh;">
+		    <div class="col" style="background-color: #f1f1f1;    margin-left: 25vh;    padding: 1vw;max-height: 32vw;">
 		    	<h1> Registro de nuevas Personas mayores </h1>
-					<p>
-					   	<label>Nombre de usuario:</label>
-			            <input type="text"/>
-					</p>
-					<p>
-					   	<label>Contraseña:</label>
-			            <input  type="password"/>
-					</p>		
-						<input type="submit" value="Acceder" />
+				<form action="#" th:action="@{/personaMayor/add}"
+                     th:object="${persona}" method="post">
+			      <table>
+			      	<tr>
+			            <td><label>DNI</label></td>
+			            <td><input type="text" th:field="*{dni}" /></td>
+			            <td th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}" class="error"></td>
+			        </tr>
+			        <tr>
+			            <td><label>Nombre</label></td>
+			            <td><input type="text" th:field="*{nombre}" /></td>
+			        </tr>
+			        <tr>
+			            <td><label>Password</label></td>
+			            <td><input type="password" th:field="*{userPwd}" /></td>
+			            <td th:if="${#fields.hasErrors('userPwd')}" th:errors="*{userPwd}" class="error"></td>
+			        </tr>
+			        <tr>
+			            <td><label>Apellidos</label></td>
+			            <td><input type="text" th:field="*{apellidos}" /></td>
+			        </tr>
+			        
+			        <tr>
+			            <td><label>Fecha de nacimiento</label></td>
+			            <td><input type="date" th:field="*{fecha_ncto}"/></td>
+			        </tr>
+			        <tr>
+			            <td><label>Dirección</label></td>
+			            <td><input type="text" th:field="*{direccion}" /></td>
+			        </tr>
+			        <tr>
+			            <td><label>Teléfono</label></td>
+			            <td><input type="text" th:field="*{telefono}" /></td>
+			             <td th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="error"></td>
+			        </tr>
+			        <tr>
+			            <td><label>Número de cuenta</label></td>
+			            <td><input type="text" th:field="*{numero_cuenta}" /></td>
+			        </tr>
+			        <tr>
+			            <td><label>Email</label></td>
+			            <td><input type="text" th:field="*{email}" /></td>
+			        </tr>
+			        <tr>
+			            <td><label>Alergias</label></td>
+			            <td><textarea type="text" th:field="*{alergias}" rows="4" cols="30"/></textarea>
+			        </tr>
+			        <tr>
+			            <td><label>Enfermedades</label></td>
+			            <td><textarea type="text" th:field="*{enfermedades}" rows="4" cols="30"/></textarea>
+			        </tr>
+			        
+			        <tr>
+			        	<td></td>
+			            <td colspan="2">
+			            <button type="submit" class="btn btn-primary btn-sm">Añadir Persona Mayor</button>
+			        </tr>
+			      </table>
+			    </form>
 		    </div>
 	    </div>
     </div>

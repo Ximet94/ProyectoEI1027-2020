@@ -1,6 +1,7 @@
 
 package es.uji.ei1027.clubesportiu.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class PersonaMayorController {
    }
    @RequestMapping("/portada")
    public String getPortada(Model model) {
+	  model.addAttribute("persona", new PersonaMayor());
       return "personaMayor/pruebaPersonaMayor";
    }
    
@@ -60,13 +62,15 @@ public class PersonaMayorController {
 	@RequestMapping("/add")
 	public String addPersonaMayor(Model model) {
 		model.addAttribute("persona", new PersonaMayor());
-		return "personaMayor/add";
+		return "personaMayor/pruebaPersonaMayor";
 	}
 	
-	//Añadido codigo de validacion de trabajador Social
    @RequestMapping(value="/add", method=RequestMethod.POST)
    public String processAddSubmit(@ModelAttribute("persona") PersonaMayor persona,
                                    BindingResult bindingResult) {
+       Date date = new Date();
+       persona.setFecha_creacion(date);
+	   //persona.setFecha_creacion(fecha_creacion);
 	   PersonaMayorValidator pmValidator = new PersonaMayorValidator();
 	   pmValidator.validate(persona, bindingResult);
    	 if (bindingResult.hasErrors())

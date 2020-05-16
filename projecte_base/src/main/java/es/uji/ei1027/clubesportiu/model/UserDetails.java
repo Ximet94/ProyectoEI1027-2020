@@ -3,7 +3,7 @@ package es.uji.ei1027.clubesportiu.model;
 public class UserDetails {
 	String username;
 	String password; 
-	
+	String role;
 	public String getUsername() {
 		return username; 
 	}
@@ -18,5 +18,12 @@ public class UserDetails {
 
 	public void setPassword(String password) {
 	   this.password = password;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 }

@@ -25,10 +25,10 @@ public class UserController {
        if (session.getAttribute("user") == null) 
        { 
           model.addAttribute("user", new UserDetails()); 
-          session.setAttribute("nextUrl", "/user/list");
-          return "user/login";
+          return "login";
        } 
        model.addAttribute("users", userDao.listAllUsers());
        return "user/list";
    }
 }
+

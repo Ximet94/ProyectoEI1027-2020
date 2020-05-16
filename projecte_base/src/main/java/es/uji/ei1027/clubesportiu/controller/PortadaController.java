@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PortadaController {
 	@RequestMapping("/entrada")
 	public String provaWeb(Model model) {
-		return "/index3";
+		return "/login";
 	}
 }

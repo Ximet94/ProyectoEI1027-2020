@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{fragmentos/base}">
+<head>
+<title>EI1027</title>
+<meta charset="UTF-8"/>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css"
+                                    th:href="@{/css/bootstrap.css}"/>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+<div  layout:fragment="content" style="margin: 5vh;">
+	<div class="container" style="margin: 5vh;">
+  		<div class="row">
+    		<div class="col">
+    			<h2>Acceso</h2>
+					<form action="#" th:action="@{/login}" 
+					      th:object="${user}" method="post">
+						<p>
+						   	<label>Nombre de usuario:</label>
+				            <input class="form_control" type="text" th:field="*{username}"/>
+				            <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+						</p>
+						<p>
+						   	<label>Contraseña:</label>
+				            <input class="form_control" type="password" th:field="*{password}"/>
+				            <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+						</p>	
+						<p>
+						   	<label>Role:</label>
+				            <input class="form_control" type="text" th:field="*{role}"/>
+						</p>		
+						<input type="submit" value="Accedir" />
+					</form>
+    		</div>
+    		<div class="col">
+    			<h1>Registrarse</h1>
+    		</div>
+ 	 	</div>	
+	</div>
+</div>
+</body>
+</html>

@@ -1,6 +1,9 @@
 package es.uji.ei1027.clubesportiu;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -17,6 +20,7 @@ public class ClubesportiuApplication implements CommandLineRunner {
 		 new SpringApplicationBuilder(ClubesportiuApplication.class).run(args);
         // En primer lloc, ens assegurem que el driver de PostgreSQL està disponible
         System.out.println("Prova de connexió a PostgreSQL amb JDBC");
+        
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -48,55 +52,6 @@ public class ClubesportiuApplication implements CommandLineRunner {
             System.out.println("La connexió ha fallat!");
         }
 
-        // Ara, anem a fer una consulta per a extraure
-        // les dades de la taula Nadador
-        ResultSet resultSet = null;
-        Statement statement = null;
-        try {
-            System.out.println("Executant la consulta...");
-            statement = connection.createStatement();
-
-            String sql = "SELECT * FROM trabajador";
-
-            resultSet = statement.executeQuery(sql);
-            System.out.println("Dades trobades...");
-            // Mostrar el ResultSet
-            if (resultSet != null) { // Si result == null no hi ha dades que mostrar
-                while (resultSet.next()) // amb este while processem totes les tuples que hi ha en el ResultSet
-                {   /* Per a cada columna hem de buscar la seua dada:*/
-                    System.out.println("Nombre del usuarioCAS: " + resultSet.getString(1));  //en este cas accedim per número de columna
-                    System.out.println("Nombre del usuario: " + resultSet.getString(2));
-                    System.out.println("Password del usuario " + resultSet.getString(3));
-                    System.out.println("Teléfono del usuario" + resultSet.getInt(4));
-                    System.out.println("Email del usuario" + resultSet.getString(5));
-                    System.out.println("----------------------------------");
-                }
-            }
-        }
-        catch (SQLException e) {
-            System.out.println("No ha segut possible executar la consulta.... ");
-            e.printStackTrace();
-            return;
-        }
-        finally {
-            // Cal alliberar explícitament tots els recursos
-            System.out.println("Alliberant recursos...");
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            }
-            catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println("Fet!");
     }
 
 	@Override
