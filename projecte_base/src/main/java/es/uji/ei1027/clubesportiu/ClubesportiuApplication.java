@@ -7,15 +7,21 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootApplication
 public class ClubesportiuApplication implements CommandLineRunner {
 
 	private static final Logger log = Logger.getLogger(ClubesportiuApplication.class.getName());
     
+	public JdbcTemplate jdbcTemplate;
+	
 	public static void main(String[] args) {
 		 new SpringApplicationBuilder(ClubesportiuApplication.class).run(args);
         // En primer lloc, ens assegurem que el driver de PostgreSQL està disponible
@@ -59,5 +65,11 @@ public class ClubesportiuApplication implements CommandLineRunner {
 		// TODO Apéndice de método generado automáticamente
 		
 	}
+	
+	@Autowired
+	public void setDataSource(DataSource dataSource) {
+	    jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+
 
 }

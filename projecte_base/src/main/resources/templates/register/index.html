@@ -17,27 +17,12 @@
 	<div class="container" style="margin: 5vh;">
   		<div class="row">
     		<div class="col">
-    			<h2>Acceso</h2>
-					<form action="#" th:action="@{/login}" 
-					      th:object="${user}" method="post">
-						<p>
-						   	<label>Nombre de usuario:</label>
-				            <input class="form_control" type="text" th:field="*{username}"/>
-				            <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
-						</p>
-						<p>
-						   	<label>Contraseña:</label>
-				            <input class="form_control" type="password" th:field="*{password}"/>
-				            <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-						</p>	
-							
-						<input type="submit" value="Accedir" />
-					</form>
+    			<button type="button" class="btn btn-primary btn-lg"><a href="personaMayor/add" style="color:white">Registrar Persona Mayor</a></button>
     		</div>
     		<div class="col">
-    			<h3>No estás registrado?</h3> 
-    			<h5>Pulsa <a href="/registrarse">aqui</a> para registrarse</h3></h5>
+    			<button type="button" class="btn btn-primary btn-lg"><a href="empresa/add" style="color:white">Registrar Empresa</button>
     		</div>
+    		
  	 	</div>	
 	</div>
 </div>

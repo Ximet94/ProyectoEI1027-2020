@@ -62,7 +62,7 @@ public class PersonaMayorController {
 	@RequestMapping("/add")
 	public String addPersonaMayor(Model model) {
 		model.addAttribute("persona", new PersonaMayor());
-		return "personaMayor/pruebaPersonaMayor";
+		return "personaMayor/add";
 	}
 	
    @RequestMapping(value="/add", method=RequestMethod.POST)

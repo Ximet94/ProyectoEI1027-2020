@@ -23,9 +23,12 @@ class UserValidator implements Validator {
 	}
 	@Override 
 	public void validate(Object obj, Errors errors) {
-	  // Exercici: Afegeix codi per comprovar que 
-         // l'usuari i la contrasenya no estiguen buits 
-         // ...
+		UserDetails user= (UserDetails)obj;
+		 if (user.getUsername().trim().equals(""))
+		       errors.rejectValue("username", "obligatorio",
+		                          "Hay que introducir un valor");
+		 if(user.getPassword().trim().equals(""))
+			errors.rejectValue("password", "insuficiente", "La contraseña introducida es demasiado corta");
 	}
 }
 
@@ -44,6 +47,11 @@ public class LoginController {
 	public String displayLogin2(Model model) {
 		model.addAttribute("user", new UserDetails());
 		return "login";
+	}
+	
+	@RequestMapping("/registrarse")
+	public String auxiliar(Model model) {
+		return "register/index";
 	}
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
@@ -67,9 +75,10 @@ public class LoginController {
 		// Comprova que el login siga correcte 
 		// intentant carregar les dades de l'usuari 
 		user = userDao.loadUserByUsername(user.getUsername(), user.getPassword()); 
+		System.out.println(user.toString());
 		if (user == null) {
 			bindingResult.rejectValue("password", "badpw", "Contraseña incorrecta"); 
-			return "login";
+			return "entrada";
 		}
 		// Autenticats correctament. 
 		// Guardem les dades de l'usuari autenticat a la sessió
