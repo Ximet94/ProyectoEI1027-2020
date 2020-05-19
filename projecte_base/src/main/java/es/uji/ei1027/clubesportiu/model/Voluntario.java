@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Voluntario implements Comparable<Voluntario> {
 	private String usuario;
 	private String pwd;
+	private String dni;
 	private String nombre;
 	private String telefono;
 	private String email;
@@ -22,12 +23,13 @@ public class Voluntario implements Comparable<Voluntario> {
 	}
 
 
-	public Voluntario(String usuario, String pwd, String nombre, String telefono, String email, String hobbies,
+	public Voluntario(String usuario, String pwd, String nombre,String dni,  String telefono, String email, String hobbies,
 			Date fecha_aplicacion, Date fecha_aceptacion, String estado, Date fecha_ncto) {
 		super();
 		this.usuario = usuario;
 		this.pwd = pwd;
 		this.nombre = nombre;
+		this.dni = dni;
 		this.telefono = telefono;
 		this.email = email;
 		this.hobbies = hobbies;
@@ -47,7 +49,14 @@ public class Voluntario implements Comparable<Voluntario> {
 		return usuario;
 	}
 
+	public String getDni() {
+		return dni;
+	}
 
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+	
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}

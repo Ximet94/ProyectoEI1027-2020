@@ -18,7 +18,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import es.uji.ei1027.clubesportiu.model.UserDetails;
 import es.uji.ei1027.clubesportiu.model.Voluntario;
+import es.uji.ei1027.clubesportiu.model.Empresa;
 import es.uji.ei1027.clubesportiu.model.PersonaMayor;
+import es.uji.ei1027.clubesportiu.model.TrabajadorSocial;
 
 @Repository
 public class FakeUserProvider implements UserDao {
@@ -34,39 +36,90 @@ public class FakeUserProvider implements UserDao {
   @Override
   public UserDetails loadUserByUsername(String username, String password) {
 	  UserDetails user = new UserDetails();
-	  BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor(); 
-	  PersonaMayor pm = jdbcTemplate.queryForObject("SELECT * FROM personaMayor where nombre=?",new PersonaMayorRowMapper(), username);
-	  if(pm != null) {
-		  //La persona que se ha logueado es una personaMayor
-		  user.setUsername(username);
-		  System.out.println(password);
-		  System.out.println(pm.getUserPwd());
-		  //if (passwordEncryptor.checkPassword(password, pm.getUserPwd())) {
-		  if (password.equals(pm.getUserPwd())) {
-				 // Es deuria esborrar de manera segura el camp password abans de tornar-lo
-			  	user.setPassword(password);
-			  	user.setRole("personaMayor");
-			  	return user;
-		  } 
-		  else {
-				 return null; // bad login!
+	  BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+	  System.out.println(passwordEncryptor.encryptPassword(password));
+	  try {
+		  PersonaMayor pm = jdbcTemplate.queryForObject("SELECT * FROM personaMayor where dni=?",new PersonaMayorRowMapper(), username);
+		  if(pm != null) {
+			  System.out.println("Es una persona mayor");
+			  //La persona que se ha logueado es una personaMayor
+			  user.setUsername(username);
+			  if(passwordEncryptor.checkPassword(password, pm.getUserPwd())){
+				  // Es deuria esborrar de manera segura el camp password abans de tornar-lo
+				  user.setPassword(password);
+				  user.setRole("personaMayor");
+				  return user;
+			  } 
+			  else {
+				  return null; // bad login!
+			  }
 		  }
+	  }
+	  catch(Exception ex) {
 	  }
 	  
-	  Voluntario voluntario = jdbcTemplate.queryForObject("SELECT * FROM voluntario where usuario=?", new VoluntarioRowMapper(), username);
-	  if(voluntario != null) {
-		  //La persona que se ha logueado es un voluntario
-		  user.setUsername(username);
-		  if (passwordEncryptor.checkPassword(password, voluntario.getPwd())) {
-				 // Es deuria esborrar de manera segura el camp password abans de tornar-lo
-			  	user.setPassword(password);
-			  	user.setRole("voluntario");
-			  	return user;
-		  } 
-		  else {
-				 return null; // bad login!
+	  try {
+		  Voluntario voluntario = jdbcTemplate.queryForObject("SELECT * FROM voluntario where dni=?", new VoluntarioRowMapper(), username);
+		  if(voluntario != null) {
+			  System.out.println("Encontrado voluntario");
+			  //La persona que se ha logueado es un voluntario
+			  user.setUsername(username);
+			  if (passwordEncryptor.checkPassword(password, voluntario.getPwd())) {
+					 // Es deuria esborrar de manera segura el camp password abans de tornar-lo
+				  	user.setPassword(password);
+				  	user.setRole("voluntario");
+				  	return user;
+			  } 
+			  else {
+					 return null; // bad login!
+			  }
 		  }
 	  }
+	  catch(Exception ex) {
+		  
+	  }
+	  
+	  try {
+		  TrabajadorSocial trabajador= jdbcTemplate.queryForObject("SELECT * FROM trabajador where dni=?", new TrabajadorSocialRowMapper(), username);
+		  if(trabajador != null) {
+			  System.out.println("Encontrado voluntario");
+			  //La persona que se ha logueado es un voluntario
+			  user.setUsername(username);
+			  if (passwordEncryptor.checkPassword(password, trabajador.getPwd())) {
+					 // Es deuria esborrar de manera segura el camp password abans de tornar-lo
+				  	user.setPassword(password);
+				  	user.setRole("voluntario");
+				  	return user;
+			  } 
+			  else {
+					 return null; // bad login!
+			  }
+		  }
+	  }
+	  catch(Exception ex) {
+		  
+	  }
+	  
+	  try {
+		  Empresa empresa = jdbcTemplate.queryForObject("SELECT * FROM empresa where cif=?", new EmpresaRowMapper(), username);
+		  if(empresa != null) {
+			  //La persona que se ha logueado es un voluntario
+			  user.setUsername(username);
+			  if (passwordEncryptor.checkPassword(password, empresa.getPwd())) {
+					 // Es deuria esborrar de manera segura el camp password abans de tornar-lo
+				  	user.setPassword(password);
+				  	user.setRole("voluntario");
+				  	return user;
+			  } 
+			  else {
+					 return null; // bad login!
+			  }
+		  }
+	  }
+	  catch(Exception ex) {
+		  
+	  }
+	  
 	  return null;
   }
 

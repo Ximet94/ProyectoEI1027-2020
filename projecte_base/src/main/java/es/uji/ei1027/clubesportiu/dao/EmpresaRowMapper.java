@@ -20,7 +20,7 @@ public class EmpresaRowMapper implements RowMapper<Empresa> {
 		empresa.setTelefono_contacto(rs.getString("telefono_contacto"));
 		empresa.setEmail_contacto(rs.getString("email_contacto"));
 		empresa.setTipo_servicio(rs.getString("tipo_servicio"));
-
+		empresa.setPwd(rs.getString("pwd"));
 		return empresa;
 	}
 

@@ -6,12 +6,14 @@ public class TrabajadorSocial implements Comparable<TrabajadorSocial>{
    private String pwd;
    private String telefono;
    private String email;
+   private String dni;
 
-   public TrabajadorSocial(String usuarioCAS, String nombre, String pwd, String telefono, String email) {
+   public TrabajadorSocial(String usuarioCAS, String nombre, String pwd, String telefono, String email, String dni) {
 		super();
 		this.usuarioCAS = usuarioCAS;
 		this.nombre = nombre;
 		this.pwd = pwd;
+		this.dni = dni;
 		this.telefono = telefono;
 		this.email = email;
    }
@@ -24,6 +26,14 @@ public class TrabajadorSocial implements Comparable<TrabajadorSocial>{
 		return usuarioCAS;
 	}
 
+	public String getDni() {
+		return dni;
+	}
+	
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+	
 	public void setUsuarioCAS(String usuarioCAS) {
 		this.usuarioCAS = usuarioCAS;
 	}

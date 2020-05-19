@@ -14,6 +14,7 @@ public class VoluntarioRowMapper implements RowMapper<Voluntario> {
 		Voluntario voluntario = new Voluntario();
 		voluntario.setUsuario(rs.getString("usuario"));
 		voluntario.setPwd(rs.getString("pwd"));
+		voluntario.setDni(rs.getString("dni"));
 		voluntario.setNombre(rs.getString("nombre"));
 		voluntario.setTelefono(rs.getString("telefono"));
 		voluntario.setEmail(rs.getString("email"));

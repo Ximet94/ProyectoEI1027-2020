@@ -7,12 +7,13 @@ public class Empresa implements Comparable<Empresa>{
 	private String nombre_contacto;
 	private String telefono_contacto;
 	private String email_contacto;
+	private String pwd;
 	private String tipo_servicio; // TODO: cambiar a enumeración ServicioEnum
 	public Empresa() {
 		super();
 	}
 	public Empresa(String cif, String nombre, String direccion, String nombre_contacto, String telefono_contacto,
-			String email_contacto, String tipo_servicio) {
+			String email_contacto, String tipo_servicio, String pwd) {
 		super();
 		this.cif = cif;
 		this.nombre = nombre;
@@ -20,6 +21,7 @@ public class Empresa implements Comparable<Empresa>{
 		this.nombre_contacto = nombre_contacto;
 		this.telefono_contacto = telefono_contacto;
 		this.email_contacto = email_contacto;
+		this.pwd = pwd;
 		this.tipo_servicio = tipo_servicio;
 	}
 	public String getCif() {
@@ -31,6 +33,13 @@ public class Empresa implements Comparable<Empresa>{
 	public String getNombre() {
 		return nombre;
 	}
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

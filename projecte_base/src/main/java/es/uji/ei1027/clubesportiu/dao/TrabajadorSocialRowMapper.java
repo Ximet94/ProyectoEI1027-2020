@@ -13,6 +13,7 @@ public final class TrabajadorSocialRowMapper implements RowMapper<TrabajadorSoci
        trabajador.setUsuarioCAS(rs.getString("usuarioCAS"));
        trabajador.setNombre(rs.getString("nombre"));
        trabajador.setPwd(rs.getString("pwd"));
+       trabajador.setDni(rs.getString("dni"));
        trabajador.setTelefono(rs.getString("telefono"));
        trabajador.setEmail(rs.getString("email"));
        return trabajador;
