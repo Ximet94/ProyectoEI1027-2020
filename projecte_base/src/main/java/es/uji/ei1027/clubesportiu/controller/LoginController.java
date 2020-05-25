@@ -13,7 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.validation.Errors; 
 import org.springframework.validation.Validator;
 
-import es.uji.ei1027.clubesportiu.dao.UserDao; 
+import es.uji.ei1027.clubesportiu.dao.UserDao;
+import es.uji.ei1027.clubesportiu.model.PersonaMayor;
 import es.uji.ei1027.clubesportiu.model.UserDetails;
 
 class UserValidator implements Validator { 
@@ -57,12 +58,13 @@ public class LoginController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String checkLogin(@ModelAttribute("user") UserDetails user,
 				BindingResult bindingResult, HttpSession session) {
+		System.out.println("que haces en el login Controller");
 		UserValidator userValidator = new UserValidator(); 
 		userValidator.validate(user, bindingResult); 
 		if (bindingResult.hasErrors()) {
 			return "login";
 		}
-		try {
+		/*try {
 			String nextUrl = session.getAttribute("nextUrl").toString();
 			if(! nextUrl.equals("")) {
 				session.setAttribute("nextUrl", "");
@@ -71,7 +73,7 @@ public class LoginController {
 		}
 		catch(Exception ex) {
 			
-		}
+		}*/
 		// Comprova que el login siga correcte 
 		// intentant carregar les dades de l'usuari 
 		user = userDao.loadUserByUsername(user.getUsername(), user.getPassword()); 
@@ -82,7 +84,17 @@ public class LoginController {
 		}
 		// Autenticats correctament. 
 		// Guardem les dades de l'usuari autenticat a la sessió
-		session.setAttribute("user", user); 
+		session.setAttribute("user", user);
+		String role = user.getRole();
+		switch(role) {
+			case "personaMayor":
+				 //model.addAttribute("peticion", new Peticion());
+				return "/personaMayor/portada";
+				
+			case "voluntario":
+				System.out.println("voluntariooooooooooooooooooo");
+				return "voluntario/portada";
+		}
 		
 		// Torna a la pàgina principal
 		return "redirect:/";

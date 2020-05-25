@@ -30,10 +30,19 @@ public class PeticionController {
 		return "peticion/list";
 	}
 	
+	@RequestMapping(value="/add")
+	public String nuevaPeticion(Model model) {
+		System.out.println("nueva peticion");
+		model.addAttribute("peticion", new Peticion());
+		return "peticion/add";
+	}
+	
+	
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
    public String processAddSubmit(@ModelAttribute("peticion") Peticion peticion,
                                    BindingResult bindingResult) {
+		
 	   PeticionValidator validator = new PeticionValidator();
 	   validator.validate(peticion, bindingResult);
    	 if (bindingResult.hasErrors())

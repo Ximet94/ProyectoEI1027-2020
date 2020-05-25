@@ -26,4 +26,8 @@ public class UserDetails {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	public String toString() {
+		return "Usuario" + username + ", role " + role;
+	}
+	
 }

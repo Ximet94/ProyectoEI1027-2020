@@ -3,16 +3,26 @@
      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
      layout:decorate="~{fragmentos/base}">
 <head>
-<title>EI1027</title>
+<title>Solicitud</title>
 <meta charset="UTF-8"/>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css"
+                                    th:href="@{/css/bootstrap.css}"/>
+
 </head>
 <body>
-<div layout:fragment="content" style="margin: 1vw;"
-	<h1>Gestión de las personas mayores</h1>
-	<ul>
-		<li><a href="list">Listar todas las personas mayores</a></li>
-		<li><a href="peticion">Solicitud de Persona Mayor</a></li>
-	</ul>
+<div layout:fragment="content" style="margin: 1vw;">
+	<h3>Gestión de peticiones</h3>
+	<div id="nueva" style="background-color: #ece5e5;height:100%;    margin: 2vh;padding: 2vh;"> 
+		<h5>Crear una nueva petición</h5>
+			<button type="button" class="btn btn-primary btn-lg"> <a href="peticion/add" style="color:white"> Nueva petición </a> </button>
+	</div>
+	
+	<div id="historial" style="background-color: #ece5e5;;height:20vw;    margin: 2vh;padding: 2vh;"> 
+		<h5>Historial de peticiones</h5>
+	</div>
+	
 </div>
 </body>
 </html>

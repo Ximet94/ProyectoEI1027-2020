@@ -37,7 +37,7 @@ public class FakeUserProvider implements UserDao {
   public UserDetails loadUserByUsername(String username, String password) {
 	  UserDetails user = new UserDetails();
 	  BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
-	  System.out.println(passwordEncryptor.encryptPassword(password));
+	  //System.out.println(passwordEncryptor.encryptPassword(password));
 	  try {
 		  PersonaMayor pm = jdbcTemplate.queryForObject("SELECT * FROM personaMayor where dni=?",new PersonaMayorRowMapper(), username);
 		  if(pm != null) {

@@ -35,7 +35,7 @@ public class PersonaMayorController {
    @RequestMapping("/portada")
    public String getPortada(Model model) {
 	  model.addAttribute("persona", new PersonaMayor());
-      return "personaMayor/pruebaPersonaMayor";
+      return "personaMayor/portada2";
    }
    
    @RequestMapping("/login")

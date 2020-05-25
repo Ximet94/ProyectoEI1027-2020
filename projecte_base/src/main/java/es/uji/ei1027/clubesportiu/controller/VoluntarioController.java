@@ -31,6 +31,13 @@ public class VoluntarioController {
 		return "voluntario/list";
 	}
 	
+	@RequestMapping("/portada")
+	public String portada(Model model) {
+		System.out.println("encontrado template");
+		//model.addAttribute("voluntarios", voluntarioDao.getVoluntarios());
+		return "voluntario/list";
+	}
+	
 	@RequestMapping("/indexVoluntario")
 	   public String gestionTrabajador(Model model) {
 	      return "voluntario/indexVoluntario";
