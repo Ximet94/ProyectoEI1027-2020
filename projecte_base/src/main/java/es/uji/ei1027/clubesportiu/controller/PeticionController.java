@@ -42,9 +42,10 @@ public class PeticionController {
 	@RequestMapping(value="/add", method=RequestMethod.POST)
    public String processAddSubmit(@ModelAttribute("peticion") Peticion peticion,
                                    BindingResult bindingResult) {
-		
 	   PeticionValidator validator = new PeticionValidator();
+	   System.out.println("2");
 	   validator.validate(peticion, bindingResult);
+	   System.out.println("3");
    	 if (bindingResult.hasErrors())
    			return "peticion/add";
    	 try {   		 

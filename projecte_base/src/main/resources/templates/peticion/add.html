@@ -22,24 +22,72 @@
 		        <tr>
 		        	<td><label>Tipo del servicio</label></td>
 		            <td>
-					<select class="form_control" type="text" th:field="*{tipo_servicio}">
-						<option value="No seleccionado">Selecciona el tipo de servicio</option>
-						<option value="comida">Comida</option>
-						<option value="santario">Sanitario</option>
-						<option value="limpieza">Limpieza</option>
-					</select>
+						<div class="form-check" th:field="*{tipo_servicio}">
+						  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+						  <label class="form-check-label" for="exampleRadios1" style="font-size: x-large;">
+							Comida
+						  </label>
+						  
+						  <label style="margin-left:2vh">
+						  					Servicios básicos de comida
+						  </label>
+						</div>
+						<div class="form-check ">
+						  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+						  <label class="form-check-label" for="exampleRadios2" style="font-size: x-large;">
+						    Sanitario
+						  </label>
+						  <label style="margin-left:2vh">
+						  	Comentario 2
+						  </label>
+						</div>
+						<div class="form-check ">
+						  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+						  <label class="form-check-label" for="exampleRadios2" style="font-size: x-large;">
+						    Limpieza
+						  </label>
+						  <label style="margin-left:2vh">
+						  	Comentario 3
+						  </label>
+						</div>
 					</td>
 				</tr>
-				<tr>
-		            <td><label>Fecha de finalización</label></td>
-		            <td><input type="date" th:field="*{fecha_finalizacion}" /></td>
+				
+		        <tr>
+		        	<td><label>Comentarios</label></td>
+		        	<td><textarea  rows="10" cols="70" th:field="*{comentarios}"></textarea></td>
 		        </tr>
 				 <tr>
-		            <td colspan="2"><input type="submit" value="Solicitar petición" /></td>
+		            <td colspan="2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+		            Solicitar petición</td>
 		        </tr>
         	</table>
 		</form>
 	</div>
+	<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          Modal body.. 
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
 	
 	
 </div>
