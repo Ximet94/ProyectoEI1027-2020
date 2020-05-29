@@ -88,7 +88,7 @@ public class FakeUserProvider implements UserDao {
 			  if (passwordEncryptor.checkPassword(password, trabajador.getPwd())) {
 					 // Es deuria esborrar de manera segura el camp password abans de tornar-lo
 				  	user.setPassword(password);
-				  	user.setRole("voluntario");
+				  	user.setRole("trabajadorSocial");
 				  	return user;
 			  } 
 			  else {
@@ -108,7 +108,7 @@ public class FakeUserProvider implements UserDao {
 			  if (passwordEncryptor.checkPassword(password, empresa.getPwd())) {
 					 // Es deuria esborrar de manera segura el camp password abans de tornar-lo
 				  	user.setPassword(password);
-				  	user.setRole("voluntario");
+				  	user.setRole("empresa");
 				  	return user;
 			  } 
 			  else {

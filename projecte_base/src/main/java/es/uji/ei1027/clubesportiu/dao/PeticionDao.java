@@ -72,4 +72,14 @@ public class PeticionDao {
        }
    }
    
+   public List<Peticion> getPeticionesFromEmpresa(String cif){
+	   try {
+		   List<Peticion> resultado = jdbcTemplate.query("SELECT * from Peticion where cif_empresa=?", new PeticionRowMapper(), cif);
+           return resultado;
+       }
+       catch(NullPointerException e) {
+           return new ArrayList<Peticion>();
+       }
+   }
+   
 }

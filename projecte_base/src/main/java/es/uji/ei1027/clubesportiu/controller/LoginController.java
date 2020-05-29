@@ -94,6 +94,7 @@ public class LoginController {
 		// Guardem les dades de l'usuari autenticat a la sessió
 		session.setAttribute("user", user);
 		String role = user.getRole();
+		System.out.println(role + "!!!!!!!!!!!!!!!!!!!!");
 		switch(role) {
 			case "personaMayor":
 				PeticionDao peticionDao = new PeticionDao();
@@ -110,6 +111,11 @@ public class LoginController {
 				List<Contrato> contratos = new ArrayList<Contrato>(); 
 				contratos = contratoDao.getContratosFromEmpresa(user.getUsername());
 				model.addAttribute("contratos", contratos);
+				PeticionDao peticionDaoE = new PeticionDao();
+				List<Peticion> peticionesE = new ArrayList<Peticion>(); 
+				peticionesE = peticionDaoE.getPeticionesFromEmpresa(user.getUsername());
+				model.addAttribute("peticiones", peticionesE);
+				
 				return "empresa/portada";
 		}
 		
