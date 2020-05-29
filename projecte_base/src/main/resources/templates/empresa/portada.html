@@ -22,11 +22,19 @@
 			<thead>
 				<tr>
 					<th> Numero de contrato </th>
+					<th> Descripcion </th>
+					<th> Tipo del servicio </th>
+					<th> Cantidad </th>
+					<th> Precio </th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each = "contrato: ${contratos}">
 					<td th:text = "${contrato.numero}" ></td>
+					<td th:text = "${contrato.descripcion}" ></td>
+					<td th:text = "${contrato.tipo_servicio}" ></td>
+					<td th:text = "${contrato.cantidad_servicio}" ></td>
+					<td th:text = "${contrato.precio_unidad}" ></td>					
 				</tr>
 			</tbody>
 		</table>
