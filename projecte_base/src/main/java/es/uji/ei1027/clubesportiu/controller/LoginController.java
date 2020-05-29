@@ -1,5 +1,8 @@
 package es.uji.ei1027.clubesportiu.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired; 
@@ -13,8 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.validation.Errors; 
 import org.springframework.validation.Validator;
 
+import es.uji.ei1027.clubesportiu.dao.ContratoDao;
+import es.uji.ei1027.clubesportiu.dao.PersonaMayorDao;
+import es.uji.ei1027.clubesportiu.dao.PeticionDao;
 import es.uji.ei1027.clubesportiu.dao.UserDao;
+import es.uji.ei1027.clubesportiu.model.Contrato;
 import es.uji.ei1027.clubesportiu.model.PersonaMayor;
+import es.uji.ei1027.clubesportiu.model.Peticion;
 import es.uji.ei1027.clubesportiu.model.UserDetails;
 
 class UserValidator implements Validator { 
@@ -57,7 +65,7 @@ public class LoginController {
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String checkLogin(@ModelAttribute("user") UserDetails user,
-				BindingResult bindingResult, HttpSession session) {
+				BindingResult bindingResult, HttpSession session, Model model) {
 		System.out.println("que haces en el login Controller");
 		UserValidator userValidator = new UserValidator(); 
 		userValidator.validate(user, bindingResult); 
@@ -88,12 +96,21 @@ public class LoginController {
 		String role = user.getRole();
 		switch(role) {
 			case "personaMayor":
-				 //model.addAttribute("peticion", new Peticion());
+				PeticionDao peticionDao = new PeticionDao();
+				List<Peticion> peticiones = new ArrayList<Peticion>(); 
+				peticiones = peticionDao.getPeticionesFromUser(user.getUsername());
+				model.addAttribute("peticiones", peticiones);
 				return "/personaMayor/portada";
 				
 			case "voluntario":
-				System.out.println("voluntariooooooooooooooooooo");
 				return "voluntario/portada";
+			
+			case "empresa":
+				ContratoDao contratoDao = new ContratoDao();
+				List<Contrato> contratos = new ArrayList<Contrato>(); 
+				contratos = contratoDao.getContratosFromEmpresa(user.getUsername());
+				model.addAttribute("contratos", contratos);
+				return "empresa/portada";
 		}
 		
 		// Torna a la pàgina principal

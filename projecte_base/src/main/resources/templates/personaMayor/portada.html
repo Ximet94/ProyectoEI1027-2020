@@ -21,6 +21,27 @@
 	
 	<div id="historial" style="background-color: #ece5e5;;height:20vw;    margin: 2vh;padding: 2vh;"> 
 		<h5>Historial de peticiones</h5>
+		<div th:if="${#lists.isEmpty(peticiones)}">
+			No hay peticiones
+		</div>
+		<table th:unless="${#lists.isEmpty(peticiones)}" class ="table table-condensed">
+			<thead>
+				<tr>
+					<th> Numero de peticion </th>
+					<th> Tipo del servicio </th>
+					<th> Estado de la peticion </th>
+					<th> Comentarios </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each = "peticion: ${peticiones}">
+					<td th:text = "${peticion.numero}" ></td>
+					<td th:text = "${peticion.tipo_servicio}" ></td>
+					<td th:text = "${peticion.estado}" ></td>
+					<td th:text = "${peticion.comentarios}" ></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 	
 </div>

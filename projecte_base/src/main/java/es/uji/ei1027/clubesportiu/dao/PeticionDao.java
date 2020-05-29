@@ -62,4 +62,14 @@ public class PeticionDao {
            return new ArrayList<Peticion>();
        }
    }
+   public List<Peticion> getPeticionesFromUser(String dni){
+	   try {
+		   List<Peticion> resultado = jdbcTemplate.query("SELECT * from Peticion where dni_personaMayor=?", new PeticionRowMapper(), dni);
+           return resultado;
+       }
+       catch(NullPointerException e) {
+           return new ArrayList<Peticion>();
+       }
+   }
+   
 }

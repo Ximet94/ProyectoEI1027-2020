@@ -54,5 +54,14 @@ public class ContratoDao {
 	           return new ArrayList<Contrato>();
 	       }
 	   }
+	   
+	   public List<Contrato> getContratosFromEmpresa(String cif) {
+	       try {
+	           return jdbcTemplate.query("SELECT * FROM Contrato where cif_empresa=?", new ContratoRowMapper(),cif);
+	       }
+	       catch(NullPointerException e) {
+	           return new ArrayList<Contrato>();
+	       }
+	   }
 
 }
