@@ -24,11 +24,22 @@ public class PeticionDao {
    }
 
    
-   void addPeticion(Peticion peticion) {
+   public void addPeticion(Peticion peticion) {
        jdbcTemplate.update("INSERT INTO Peticion values(?,?,?,?,?,?,?,?,?,?,?)", 
     		   peticion.getNumero(), peticion.getTipo_servicio(), peticion.getFecha_creacion(), peticion.getEstado(),
     		   peticion.getFecha_aprobacion(), peticion.getFecha_rechazado(), peticion.getComentarios(), peticion.getFecha_finalizacion(),
     		   peticion.getDni_personaMayor(), peticion.getNumero_factura(), peticion.getNumero_contrato());
+   }
+   
+   public void anadirPeticion(Peticion peticion) {
+	   System.out.println("Entrando" + peticion.getNumero() + peticion.getTipo_servicio() + peticion.getDni_personaMayor());
+	   try{
+		   jdbcTemplate.update("INSERT INTO Peticion (numero, tipo_servicio, dni_personamayor) VALUES (?,?,?)",
+			   peticion.getNumero(), peticion.getTipo_servicio(), peticion.getDni_personaMayor());
+	   }
+	   catch(Exception ex) {
+		   System.out.println("Excepcion " + ex);
+	   }
    }
    
    void deletePeticion(Peticion peticion) {

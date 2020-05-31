@@ -1,5 +1,7 @@
 package es.uji.ei1027.clubesportiu.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.clubesportiu.dao.PeticionDao;
 import es.uji.ei1027.clubesportiu.model.Peticion;
+import es.uji.ei1027.clubesportiu.model.UserDetails;
 
 @Controller
 @RequestMapping("/peticion")
@@ -41,20 +44,24 @@ public class PeticionController {
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
    public String processAddSubmit(@ModelAttribute("peticion") Peticion peticion,
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult, HttpSession session) {
+		System.out.println("2");
 	   PeticionValidator validator = new PeticionValidator();
-	   System.out.println("2");
 	   validator.validate(peticion, bindingResult);
-	   System.out.println("3");
+	   UserDetails user = (UserDetails) session.getAttribute("user");
+	   peticion.setDni_personaMayor(user.getUsername());
    	 if (bindingResult.hasErrors())
    			return "peticion/add";
    	 try {   		 
-   		 //trabajadorDao.addTrabajadorSocial(trabajador); 
+   		 //Añadir la peticion a BBDD
+   		 //System.out.println("Añadiendo a base de datos " + peticion.toString());
+   		 PeticionDao peticionDao = new PeticionDao();
+   		 peticionDao.anadirPeticion(peticion);
    	 }
    	 catch(DuplicateKeyException e){
-   		 //throw new ClubesportiuException("Ya existe una solicitud para este " + trabajador.getUsuarioCAS(), "CPduplicada");
+   		 throw new ClubesportiuException("Ya existe una solicitud para este " + peticion.getDni_personaMayor(), "CPduplicada");
    	 }
-   	 return "redirect:list";
+   	 return "personaMayor/portada";
     }
 
 }

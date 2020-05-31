@@ -20,72 +20,38 @@
                      th:object="${peticion}" method="post">
 			<table>
 		        <tr>
-		        	<td><label>Tipo del servicio</label></td>
-		            <td>
-						<div class="form-check" th:field="*{tipo_servicio}">
-						  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-						  <label class="form-check-label" for="exampleRadios1" style="font-size: x-large;">
-							Comida
-						  </label>
-						  
-						  <label style="margin-left:2vh">
-						  					Servicios básicos de comida
-						  </label>
-						</div>
-						<div class="form-check ">
-						  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-						  <label class="form-check-label" for="exampleRadios2" style="font-size: x-large;">
-						    Sanitario
-						  </label>
-						  <label style="margin-left:2vh">
-						  	Comentario 2
-						  </label>
-						</div>
-						<div class="form-check ">
-						  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-						  <label class="form-check-label" for="exampleRadios2" style="font-size: x-large;">
-						    Limpieza
-						  </label>
-						  <label style="margin-left:2vh">
-						  	Comentario 3
-						  </label>
-						</div>
+		        	<td><h2>Tipo del servicio</h2></td>
+		        	</tr>
+		        	<tr style="font-size: x-large;">
+		            <td><span>
+						<input type="radio" th:field="*{tipo_servicio}"
+							value= "comida" id="comida" />
+							<label for="tipus1">Comida</label>
+						</span>
+						<span>
+							<input type= "radio" th:field="*{tipo_servicio}"
+							value="sanitario" id="tipus2" />
+							<label for="tipus2">Sanitario</label>
+						</span>
+						<span>
+							<input type= "radio" th:field="*{tipo_servicio}"
+							value="limpieza" id="tipus3" />
+						<label for="tipus2">Limpieza</label>
+						</span>
 					</td>
 				</tr>
 				
 		        <tr>
-		        	<td><label>Comentarios</label></td>
+		        	<td><label style="font-size: x-large;">Comentarios</label></td>
 		        	<td><textarea  rows="10" cols="70" th:field="*{comentarios}"></textarea></td>
 		        </tr>
 				 <tr>
-		            <td colspan="2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+		            <td colspan="2"><button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 		            Solicitar petición</td>
 		        </tr>
         	</table>
 		</form>
 	</div>
-	<div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-          Modal body.. 
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        
-      </div>
-    </div>
   </div>
   
 	
