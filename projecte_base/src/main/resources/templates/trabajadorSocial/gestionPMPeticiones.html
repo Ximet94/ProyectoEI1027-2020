@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{fragmentos/base}">
+<head>
+<title>Solicitud</title>
+<meta charset="UTF-8"/>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css"
+                                    th:href="@{/css/bootstrap.css}"/>
+
+</head>
+<body>
+<div layout:fragment="content" style="margin: 1vw;">
+	<h1>Gestion de Peticiones</h1>
+	<div class="col-6" style="padding:1vh">
+	<div th:if="${#lists.isEmpty(peticiones)}">
+			No hay peticiones
+		</div>
+	<table th:unless="${#lists.isEmpty(peticiones)}" class ="table table-condensed">
+			<thead>
+				<tr>
+					<th> Numero de peticion </th>
+					<th> Tipo del servicio </th>
+					<th> Estado de la peticion </th>
+					<th> Comentarios </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each = "peticion: ${peticiones}">
+					<td th:text = "${peticion.numero}" ></td>
+					<td th:text = "${peticion.tipo_servicio}" ></td>
+					<td th:text = "${peticion.estado}" ></td>
+					<td th:text = "${peticion.comentarios}" ></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	
+</div>
+</body>
+</html>

@@ -1,5 +1,8 @@
 package es.uji.ei1027.clubesportiu.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +47,11 @@ public class PeticionController {
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
    public String processAddSubmit(@ModelAttribute("peticion") Peticion peticion,
-                                   BindingResult bindingResult, HttpSession session) {
-		System.out.println("2");
+                                   BindingResult bindingResult, HttpSession session, Model model) {
 	   PeticionValidator validator = new PeticionValidator();
-	   validator.validate(peticion, bindingResult);
 	   UserDetails user = (UserDetails) session.getAttribute("user");
 	   peticion.setDni_personaMayor(user.getUsername());
+	   validator.validate(peticion, bindingResult);
    	 if (bindingResult.hasErrors())
    			return "peticion/add";
    	 try {   		 
@@ -61,6 +63,10 @@ public class PeticionController {
    	 catch(DuplicateKeyException e){
    		 throw new ClubesportiuException("Ya existe una solicitud para este " + peticion.getDni_personaMayor(), "CPduplicada");
    	 }
+   	List<Peticion> peticiones = new ArrayList<Peticion>(); 
+	peticiones = peticionDao.getPeticionesFromUser(user.getUsername());
+	//System.out.println("peticiones " + peticiones);
+	model.addAttribute("peticiones", peticiones);
    	 return "personaMayor/portada";
     }
 

@@ -1,5 +1,10 @@
 package es.uji.ei1027.clubesportiu.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -10,8 +15,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.uji.ei1027.clubesportiu.dao.ContratoDao;
 import es.uji.ei1027.clubesportiu.dao.EmpresaDao;
+import es.uji.ei1027.clubesportiu.dao.PeticionDao;
+import es.uji.ei1027.clubesportiu.model.Contrato;
 import es.uji.ei1027.clubesportiu.model.Empresa;
+import es.uji.ei1027.clubesportiu.model.Peticion;
+import es.uji.ei1027.clubesportiu.model.UserDetails;
 
 @Controller
 @RequestMapping("/empresa")
@@ -19,6 +29,9 @@ public class EmpresaController {
 	
 	@Autowired
 	private EmpresaDao empresaDao;
+	
+	@Autowired
+	HttpSession session;
 	
 	@Autowired
 	public void setEmpresaDao(EmpresaDao empresaDao) {
@@ -34,6 +47,27 @@ public class EmpresaController {
 	@RequestMapping("/indexEmpresas")
 	public String gestionEmpresa(Model model) {
       return "empresa/indexEmpresas";
+	}
+	
+	@RequestMapping("/gestionContratos")
+	public String gestionContratos(Model model) {
+		ContratoDao contratoDao = new ContratoDao();
+		List<Contrato> contratos = new ArrayList<Contrato>(); 
+		UserDetails user = (UserDetails) session.getAttribute("user");
+		contratos = contratoDao.getContratosFromEmpresa(user.getUsername());
+		model.addAttribute("contratos", contratos);
+		return "empresa/gestionContratos";
+	}
+	
+	@RequestMapping("/gestionPeticiones")
+	public String gestionPeticiones(Model model) {
+		PeticionDao peticionDao = new PeticionDao();
+		List<Peticion> peticiones = new ArrayList<Peticion>(); 
+		UserDetails user = (UserDetails) session.getAttribute("user");
+		System.out.println(user.getUsername());
+		peticiones = peticionDao.getPeticiones();
+		model.addAttribute("peticiones", peticiones);
+		return "empresa/gestionPeticiones";
 	}
 	
 	@RequestMapping("/add")

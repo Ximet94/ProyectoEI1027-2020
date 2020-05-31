@@ -1,5 +1,6 @@
 package es.uji.ei1027.clubesportiu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.uji.ei1027.clubesportiu.dao.PersonaMayorDao;
+import es.uji.ei1027.clubesportiu.dao.PeticionDao;
 import es.uji.ei1027.clubesportiu.dao.TrabajadorSocialDao;
+import es.uji.ei1027.clubesportiu.model.PersonaMayor;
+import es.uji.ei1027.clubesportiu.model.Peticion;
 import es.uji.ei1027.clubesportiu.model.TrabajadorSocial;
 
 @Controller
@@ -42,6 +47,35 @@ public class TrabajadorSocialController {
 
    // Operacions: Crear, llistar, actualitzar, esborrar
    // ...
+   @RequestMapping("/gestionPersonasMayores")
+   public String gestionPersonasMayores(Model model) {
+	   List<PersonaMayor> personas = PersonaMayorDao.getPersonasMayores();
+	   model.addAttribute("personas", personas);
+	   return "trabajadorSocial/gestionPMList";
+   }
+   
+   @RequestMapping("/gestionarPeticiones")
+   public String gestionarPeticiones(Model model) {
+	   PeticionDao peticionDao = new PeticionDao();
+		List<Peticion> peticiones = new ArrayList<Peticion>(); 
+		peticiones = peticionDao.getPeticiones();
+		//System.out.println("Peticiones " + peticiones.toString());
+		model.addAttribute("peticiones", peticiones);
+	   return "trabajadorSocial/gestionPMPeticiones";
+   }
+   
+   
+   @RequestMapping("/gestionEmpresa")
+   public String gestionEmpresa(Model model) {
+	   return "trabajadorSocial/gestionEmpresa";
+   }
+   
+   @RequestMapping("/gestionPM")
+   public String gestionPM(Model model) {
+	   
+	   return "trabajadorSocial/gestionPM";
+   }
+   
    
    @RequestMapping("/list")
    public String listTrabajadores(Model model) {
@@ -93,6 +127,8 @@ public class TrabajadorSocialController {
    	 }
    	 return "redirect:list";
     }
+   
+   
    
    
 }

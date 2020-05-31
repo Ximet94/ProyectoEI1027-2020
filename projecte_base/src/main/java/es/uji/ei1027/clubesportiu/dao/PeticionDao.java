@@ -15,7 +15,7 @@ import java.util.List;
 @Repository // En Spring els DAOs van anotats amb @Repository
 public class PeticionDao {
 
-   private JdbcTemplate jdbcTemplate;
+   static JdbcTemplate jdbcTemplate;
 
    // Obté el jdbcTemplate a partir del Data Source
    @Autowired
@@ -25,17 +25,27 @@ public class PeticionDao {
 
    
    public void addPeticion(Peticion peticion) {
-       jdbcTemplate.update("INSERT INTO Peticion values(?,?,?,?,?,?,?,?,?,?,?)", 
+       jdbcTemplate.update("INSERT INTO Peticion values(?,?,?,?,?,?,?,?,?,?)", 
     		   peticion.getNumero(), peticion.getTipo_servicio(), peticion.getFecha_creacion(), peticion.getEstado(),
     		   peticion.getFecha_aprobacion(), peticion.getFecha_rechazado(), peticion.getComentarios(), peticion.getFecha_finalizacion(),
-    		   peticion.getDni_personaMayor(), peticion.getNumero_factura(), peticion.getNumero_contrato());
+    		   peticion.getDni_personaMayor(), peticion.getNumero_contrato());
    }
    
    public void anadirPeticion(Peticion peticion) {
-	   System.out.println("Entrando" + peticion.getNumero() + peticion.getTipo_servicio() + peticion.getDni_personaMayor());
 	   try{
-		   jdbcTemplate.update("INSERT INTO Peticion (numero, tipo_servicio, dni_personamayor) VALUES (?,?,?)",
-			   peticion.getNumero(), peticion.getTipo_servicio(), peticion.getDni_personaMayor());
+		   String estado = "pendiente";
+		   System.out.println("que esta pasando");
+		   List<Peticion> pet = getPeticiones();
+		   int maximo=0;
+		   for(int i=0; i<pet.size();i++) {
+			   if(pet.get(i).getNumero()> maximo) {
+				   maximo=pet.get(i).getNumero();
+			   }
+		   }
+		   System.out.println("Maximo " + maximo);
+		   maximo++;
+		   jdbcTemplate.update("INSERT INTO Peticion (numero, tipo_servicio, dni_personamayor, estado) VALUES (?,?,?,?)",
+				   maximo, peticion.getTipo_servicio(), peticion.getDni_personaMayor(), estado);
 	   }
 	   catch(Exception ex) {
 		   System.out.println("Excepcion " + ex);
@@ -49,10 +59,10 @@ public class PeticionDao {
    
 	void updatePeticion(Peticion peticion) {
 		jdbcTemplate.update("UPDATE Peticion set tipo_servicio=?, fecha_creacion=?, estado=?, fecha_aprobacion=?, fecha_rechazado=?, "
-				+ "comentarios=?, fecha_finalizacion=?, dni_personaMayor=?, numero_factura=?, numero_contrato=?",
+				+ "comentarios=?, fecha_finalizacion=?, dni_personaMayor=?,  numero_contrato=?",
 				peticion.getTipo_servicio(), peticion.getFecha_creacion(), peticion.getEstado(),
 	    		   peticion.getFecha_aprobacion(), peticion.getFecha_rechazado(), peticion.getComentarios(), peticion.getFecha_finalizacion(),
-	    		   peticion.getDni_personaMayor(), peticion.getNumero_factura(), peticion.getNumero_contrato());
+	    		   peticion.getDni_personaMayor(), peticion.getNumero_contrato());
 	}
    
 	
@@ -69,7 +79,7 @@ public class PeticionDao {
        try {
            return jdbcTemplate.query("SELECT * from Peticion", new PeticionRowMapper());
        }
-       catch(EmptyResultDataAccessException e) {
+       catch(NullPointerException e) {
            return new ArrayList<Peticion>();
        }
    }

@@ -19,6 +19,7 @@ import org.springframework.validation.Validator;
 import es.uji.ei1027.clubesportiu.dao.ContratoDao;
 import es.uji.ei1027.clubesportiu.dao.PersonaMayorDao;
 import es.uji.ei1027.clubesportiu.dao.PeticionDao;
+import es.uji.ei1027.clubesportiu.dao.TrabajadorSocialDao;
 import es.uji.ei1027.clubesportiu.dao.UserDao;
 import es.uji.ei1027.clubesportiu.model.Contrato;
 import es.uji.ei1027.clubesportiu.model.PersonaMayor;
@@ -45,11 +46,41 @@ class UserValidator implements Validator {
 public class LoginController {
 	@Autowired
 	private UserDao userDao;
+	HttpSession session;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String displayLogin(Model model) {
 		model.addAttribute("user", new UserDetails());
 		return "index3";
+	}
+	
+	@RequestMapping(value="portada")
+	public String portada (Model model) {
+		UserDetails user = (UserDetails) session.getAttribute("user");
+		//System.out.println("portadaaaaaaaaaaa " + user.getRole());
+		switch(user.getRole()) {
+			case "trabajadorSocial":
+				//System.out.println("holaaaaaaaaaaaaaaaaaa");
+				TrabajadorSocialDao ts = new TrabajadorSocialDao();
+				return "trabajadorSocial/portada";
+				
+			case "personaMayor":
+				PeticionDao peticionDao = new PeticionDao();
+				List<Peticion> peticiones = new ArrayList<Peticion>(); 
+				peticiones = peticionDao.getPeticionesFromUser(user.getUsername());
+				//System.out.println("peticiones " + peticiones);
+				model.addAttribute("peticiones", peticiones);
+				return "/personaMayor/portada";
+				
+			case "empresa":
+				return "empresa/portada";			
+			case "voluntario":
+				return "voluntario/portada";
+			
+				
+		}
+		System.out.println("Info -> " + user.toString());
+		return"";
 	}
 	
 	@RequestMapping(value = "/entrada", method = RequestMethod.GET)
@@ -66,7 +97,7 @@ public class LoginController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String checkLogin(@ModelAttribute("user") UserDetails user,
 				BindingResult bindingResult, HttpSession session, Model model) {
-		System.out.println("que haces en el login Controller");
+		this.session = session;
 		UserValidator userValidator = new UserValidator(); 
 		userValidator.validate(user, bindingResult); 
 		if (bindingResult.hasErrors()) {
@@ -94,7 +125,7 @@ public class LoginController {
 		// Guardem les dades de l'usuari autenticat a la sessió
 		session.setAttribute("user", user);
 		String role = user.getRole();
-		System.out.println(role + "!!!!!!!!!!!!!!!!!!!!");
+		//System.out.println(role + "!!!!!!!!!!!!!!!!!!!!");
 		switch(role) {
 			case "personaMayor":
 				PeticionDao peticionDao = new PeticionDao();
@@ -107,16 +138,12 @@ public class LoginController {
 				return "voluntario/portada";
 			
 			case "empresa":
-				ContratoDao contratoDao = new ContratoDao();
-				List<Contrato> contratos = new ArrayList<Contrato>(); 
-				contratos = contratoDao.getContratosFromEmpresa(user.getUsername());
-				model.addAttribute("contratos", contratos);
-				PeticionDao peticionDaoE = new PeticionDao();
-				List<Peticion> peticionesE = new ArrayList<Peticion>(); 
-				peticionesE = peticionDaoE.getPeticionesFromEmpresa(user.getUsername());
-				model.addAttribute("peticiones", peticionesE);
-				
 				return "empresa/portada";
+				
+			case "trabajadorSocial":
+				TrabajadorSocialDao ts = new TrabajadorSocialDao();
+				return "trabajadorSocial/portada";
+				
 		}
 		
 		// Torna a la pàgina principal

@@ -12,7 +12,6 @@ public class Peticion {
    private String comentarios;
    private Date fecha_finalizacion;
    private String dni_personaMayor;
-   private int numero_factura;
    private int numero_contrato;
 
    public Peticion() {
@@ -21,7 +20,7 @@ public class Peticion {
 
 	public Peticion(int numero, String tipo_servicio, Date fecha_creacion, String estado, Date fecha_aprobacion,
 			Date fecha_rechazado, String comentarios, Date fecha_finalizacion, String dni_personaMayor,
-			int numero_factura, int numero_contrato) {
+			int numero_contrato) {
 		super();
 		this.numero = numero;
 		this.tipo_servicio = tipo_servicio;
@@ -32,7 +31,6 @@ public class Peticion {
 		this.comentarios = comentarios;
 		this.fecha_finalizacion = fecha_finalizacion;
 		this.dni_personaMayor = dni_personaMayor;
-		this.numero_factura = numero_factura;
 		this.numero_contrato = numero_contrato;
 	}
 
@@ -108,13 +106,6 @@ public class Peticion {
 		this.dni_personaMayor = dni_personaMayor;
 	}
 
-	public int getNumero_factura() {
-		return numero_factura;
-	}
-
-	public void setNumero_factura(int numero_factura) {
-		this.numero_factura = numero_factura;
-	}
 
 	public int getNumero_contrato() {
 		return numero_contrato;
@@ -129,7 +120,7 @@ public class Peticion {
 		return "Peticion [numero=" + numero + ", tipo_servicio=" + tipo_servicio + ", fecha_creacion=" + fecha_creacion
 				+ ", estado=" + estado + ", fecha_aprobacion=" + fecha_aprobacion + ", fecha_rechazado="
 				+ fecha_rechazado + ", comentarios=" + comentarios + ", fecha_finalizacion=" + fecha_finalizacion
-				+ ", dni_personaMayor=" + dni_personaMayor + ", numero_factura=" + numero_factura + ", numero_contrato="
+				+ ", dni_personaMayor=" + dni_personaMayor + ", numero_contrato="
 				+ numero_contrato + "]";
 	}
 

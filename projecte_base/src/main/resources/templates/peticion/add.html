@@ -40,7 +40,9 @@
 						</span>
 					</td>
 				</tr>
-				
+				<tr>
+					<td style="color:red" th:if= "${#fields.hasErrors('tipo_servicio')}" th:errors= "*{tipo_servicio}" ></td>
+				</tr>
 		        <tr>
 		        	<td><label style="font-size: x-large;">Comentarios</label></td>
 		        	<td><textarea  rows="10" cols="70" th:field="*{comentarios}"></textarea></td>
