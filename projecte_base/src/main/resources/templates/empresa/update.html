@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"> 
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{fragmentos/base}">
 <head>
    <title>Crear una empresa</title>
    <meta charset="UTF-8" />
@@ -10,6 +12,7 @@
                                     th:href="@{/css/prueba.css}"/>
 </head>
 <body>
+<div layout:fragment="content" style="margin: 1vw;">
     <h2>Nueva Empresa</h2>
     <form action="#" th:action="@{/empresa/add}"
                      th:object="${empresa}" method="post">
@@ -56,5 +59,6 @@
         </tr>
       </table>
     </form>
+</div>
 </body>
 </html>

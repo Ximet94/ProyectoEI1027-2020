@@ -33,6 +33,16 @@
 					<td th:text = "${peticion.tipo_servicio}" ></td>
 					<td th:text = "${peticion.estado}" ></td>
 					<td th:text = "${peticion.comentarios}" ></td>
+					<td>
+			         	<button type="button" class="btn btn-success">
+			         	<a th:href="@{/peticion/aceptar/{numero}(numero=${peticion.numero})}"style="color:white">Aceptar</a>
+			         	</button>
+			         </td>
+			         <td>
+			         	<button type="button" class="btn btn-danger">
+			         		<a th:href="@{/peticion/rechazar/{numero}(numero=${peticion.numero})}"style="color:white">Rechazar</a>
+			         	</button>
+			         </td>
 				</tr>
 			</tbody>
 		</table>

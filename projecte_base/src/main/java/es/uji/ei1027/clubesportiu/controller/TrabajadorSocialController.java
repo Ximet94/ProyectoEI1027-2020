@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.uji.ei1027.clubesportiu.dao.EmpresaDao;
 import es.uji.ei1027.clubesportiu.dao.PersonaMayorDao;
 import es.uji.ei1027.clubesportiu.dao.PeticionDao;
 import es.uji.ei1027.clubesportiu.dao.TrabajadorSocialDao;
+import es.uji.ei1027.clubesportiu.dao.VoluntarioDao;
+import es.uji.ei1027.clubesportiu.model.Empresa;
 import es.uji.ei1027.clubesportiu.model.PersonaMayor;
 import es.uji.ei1027.clubesportiu.model.Peticion;
 import es.uji.ei1027.clubesportiu.model.TrabajadorSocial;
+import es.uji.ei1027.clubesportiu.model.Voluntario;
 
 @Controller
 @RequestMapping("/trabajadorSocial")
@@ -26,6 +30,12 @@ public class TrabajadorSocialController {
 
 	@Autowired
    private TrabajadorSocialDao trabajadorDao;
+	
+	@Autowired
+	private EmpresaDao empresaDao;
+	
+	@Autowired 
+	private VoluntarioDao voluntarioDao;
 
    @Autowired
    public void setTrabajadorSocialDao(TrabajadorSocialDao trabajadorDao) {
@@ -44,9 +54,17 @@ public class TrabajadorSocialController {
       return "trabajadorSocial/prova";
    }
 
-
    // Operacions: Crear, llistar, actualitzar, esborrar
    // ...
+   
+   @RequestMapping("/voluntarios")
+   public String gestionVoluntarios(Model model) {
+	   List<Voluntario> voluntarios = voluntarioDao.getVoluntarios();
+	   System.out.println("Dentro ->" + voluntarios.toString());
+	   model.addAttribute("voluntarios", voluntarios);
+	   return "trabajadorSocial/gestionVoluntarios";
+   }
+   
    @RequestMapping("/gestionPersonasMayores")
    public String gestionPersonasMayores(Model model) {
 	   List<PersonaMayor> personas = PersonaMayorDao.getPersonasMayores();
@@ -67,6 +85,10 @@ public class TrabajadorSocialController {
    
    @RequestMapping("/gestionEmpresa")
    public String gestionEmpresa(Model model) {
+	   empresaDao = new EmpresaDao();
+	   List<Empresa> empresas = empresaDao.getEmpresas();
+	   System.out.println("3");
+	   model.addAttribute("empresas", empresas);
 	   return "trabajadorSocial/gestionEmpresa";
    }
    

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{fragmentos/base}">
 <head>
    <title>Gestionar Trabajadores Sociales</title>
    <meta charset="UTF-8" />
@@ -9,6 +11,7 @@
                                     th:href="@{/css/prueba.css}"/>
 </head>
 <body>
+<div layout:fragment="content" style="margin: 1vw;">
    <h1>Lista de trabajadores sociales</h1>
    <div th:if="${#lists.isEmpty(trabajadores)}">
          No hay trabajadores sociales en la BBDD
@@ -46,5 +49,6 @@
    <button type="button" class="btn btn-success">
    <a href="add" style="color:white">Añade Trabajador Social</a>
    </button>
+</div>
 </body>
 </html>

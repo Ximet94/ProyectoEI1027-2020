@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"> 
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{fragmentos/base}">
 <head>
    <title>Crear un trabajador social</title>
    <meta charset="UTF-8" />
@@ -10,6 +12,7 @@
                                     th:href="@{/css/prueba.css}"/>
 </head>
 <body>
+<div layout:fragment="content" style="margin: 1vw;">
     <h2>Nuevo Trabajador Social</h2>
     <form action="#" th:action="@{/trabajadorSocial/add}"
                      th:object="${trabajador}" method="post">
@@ -42,5 +45,6 @@
         </tr>
       </table>
     </form>
+</div>
 </body>
 </html>

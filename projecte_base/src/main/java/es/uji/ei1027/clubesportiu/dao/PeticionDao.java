@@ -66,11 +66,20 @@ public class PeticionDao {
 	}
    
 	
-	Peticion getPeticion(int numero) {
+	public Peticion getPeticion(int numero) {
 		try {
 			return jdbcTemplate.queryForObject("SELECT * FROM Peticion where numero=?", new PeticionRowMapper(), numero);
 		} catch (EmptyResultDataAccessException e) {
 			return null;
+		}
+	}
+	
+	public void changeEstado(Peticion peticion, String nuevoEstado) {
+		try {
+			jdbcTemplate.update("UPDATE Peticion set estado=? where numero=?", nuevoEstado, peticion.getNumero());
+		}
+		catch (EmptyResultDataAccessException e) {
+			
 		}
 	}
 	

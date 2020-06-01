@@ -11,7 +11,8 @@
 <link rel="stylesheet" type="text/css" href="/css/prueba.css"
                                     th:href="@{/css/prueba.css}"/>
 </head>
-<body layout:fragment="content" style="margin: 5vh;">
+<body>
+<div layout:fragment="content" style="margin: 1vw;">
 	<div class="container" style="margin: 5vh;">
     <h2>Nueva Persona mayor</h2>
     <form action="#" th:action="@{/personaMayor/add}"
@@ -76,5 +77,6 @@
       </table>
     </form>
     </div>
+</div>   
 </body>
 </html>

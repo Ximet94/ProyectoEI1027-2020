@@ -14,7 +14,7 @@ import es.uji.ei1027.clubesportiu.model.Voluntario;
 
 @Repository
 public class VoluntarioDao {
-	   private static JdbcTemplate jdbcTemplate;
+	   static JdbcTemplate jdbcTemplate;
 
 	   @Autowired
 	   public void setDataSource(DataSource dataSource) {
@@ -52,7 +52,8 @@ public class VoluntarioDao {
 		
 	   public List<Voluntario> getVoluntarios() {
 	       try {
-	           return jdbcTemplate.query("SELECT * FROM Voluntario", new VoluntarioRowMapper());
+	    	   List<Voluntario> voluntarios = jdbcTemplate.query("SELECT * FROM Voluntario", new VoluntarioRowMapper());
+	    	   return voluntarios;
 	       }
 	       catch(EmptyResultDataAccessException e) {
 	           return new ArrayList<Voluntario>();

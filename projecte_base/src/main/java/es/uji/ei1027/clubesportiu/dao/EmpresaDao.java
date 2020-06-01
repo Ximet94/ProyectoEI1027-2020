@@ -14,7 +14,8 @@ import es.uji.ei1027.clubesportiu.model.Empresa;
 
 @Repository
 public class EmpresaDao {
-	   private JdbcTemplate jdbcTemplate;
+	   
+	static JdbcTemplate jdbcTemplate;
 
 	   @Autowired
 	   public void setDataSource(DataSource dataSource) {
@@ -49,7 +50,9 @@ public class EmpresaDao {
 		
 	   public List<Empresa> getEmpresas() {
 	       try {
-	           return jdbcTemplate.query("SELECT * FROM Empresa", new EmpresaRowMapper());
+	    	   List<Empresa> empresas = jdbcTemplate.query("SELECT * FROM Empresa", new EmpresaRowMapper());
+	    	   System.out.println(empresas.toString());
+	    	   return empresas;
 	       }
 	       catch(EmptyResultDataAccessException e) {
 	           return new ArrayList<Empresa>();

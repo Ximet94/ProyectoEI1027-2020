@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{fragmentos/base}">
 <head>
    <title>Gestionar Empresas</title>
    <meta charset="UTF-8" />
@@ -9,6 +11,7 @@
                                     th:href="@{/css/prueba.css}"/>
 </head>
 <body>
+<div layout:fragment="content" style="margin: 1vw;">
    <h1>Lista de empresas</h1>
    <div th:if="${#lists.isEmpty(empresas)}">
          No hay empresas en la BBDD
@@ -49,5 +52,6 @@
    </table>
    <button type="button" class="btn btn-success">
    <a href="add" style="color:white">Añadir Empresa</a></button>
+</div>
 </body>
 </html>
