@@ -13,9 +13,7 @@
 </head>
 <body>
 <div layout:fragment="content" style="margin: 1vw;">
-	<h3>Gestión de peticiones</h3>
 	<div id="nueva" style="background-color: #ece5e5;;height:100%;    margin: 2vh;padding: 2vh;"> 
-		<h5>Crear una nueva petición</h5>
 		<form action="#" th:action="@{/peticion/add}"
                      th:object="${peticion}" method="post">
 			<table>

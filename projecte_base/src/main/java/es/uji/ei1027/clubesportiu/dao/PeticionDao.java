@@ -34,7 +34,6 @@ public class PeticionDao {
    public void anadirPeticion(Peticion peticion) {
 	   try{
 		   String estado = "pendiente";
-		   System.out.println("que esta pasando");
 		   List<Peticion> pet = getPeticiones();
 		   int maximo=0;
 		   for(int i=0; i<pet.size();i++) {
@@ -82,7 +81,22 @@ public class PeticionDao {
 			
 		}
 	}
-	
+	public void changeEstado2(Peticion peticion, String nuevoEstado, int numContrato) {
+		try {
+			jdbcTemplate.update("UPDATE Peticion set estado=?,numero_contrato=? where numero=?", nuevoEstado, numContrato, peticion.getNumero());
+		}
+		catch (EmptyResultDataAccessException e) {
+			
+		}
+	}
+   public List<Peticion> getPeticionesPendientes() {
+       try {
+           return jdbcTemplate.query("SELECT * from Peticion where estado=?", new PeticionRowMapper(),"pendiente");
+       }
+       catch(NullPointerException e) {
+           return new ArrayList<Peticion>();
+       }
+   }
    
    public List<Peticion> getPeticiones() {
        try {
@@ -105,6 +119,17 @@ public class PeticionDao {
    public List<Peticion> getPeticionesFromEmpresa(String cif){
 	   try {
 		   List<Peticion> resultado = jdbcTemplate.query("SELECT * from Peticion where cif_empresa=?", new PeticionRowMapper(), cif);
+           return resultado;
+       }
+       catch(NullPointerException e) {
+           return new ArrayList<Peticion>();
+       }
+   }
+   
+   public List<Peticion> getPeticionesFinalizadas(){
+	   try {
+		   List<Peticion> resultado = jdbcTemplate.query("SELECT * from Peticion where estado=? or estado=?", new PeticionRowMapper(), 
+				   "aceptada", "rechazada");
            return resultado;
        }
        catch(NullPointerException e) {

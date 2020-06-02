@@ -42,6 +42,7 @@ public class EmpresaDao {
 	   
 		public Empresa getEmpresa(String cif) {
 			try {
+				System.out.println("Vamos a obtener la empresa con cif " + cif);
 				return jdbcTemplate.queryForObject("SELECT * FROM Empresa WHERE cif=?", new EmpresaRowMapper(), cif);
 			} catch (EmptyResultDataAccessException e) {
 				return null;

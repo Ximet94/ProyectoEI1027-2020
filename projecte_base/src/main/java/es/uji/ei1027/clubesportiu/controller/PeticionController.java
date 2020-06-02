@@ -1,6 +1,7 @@
 package es.uji.ei1027.clubesportiu.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,8 +16,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.uji.ei1027.clubesportiu.dao.ContratoDao;
 import es.uji.ei1027.clubesportiu.dao.PersonaMayorDao;
 import es.uji.ei1027.clubesportiu.dao.PeticionDao;
+import es.uji.ei1027.clubesportiu.model.Contrato;
+import es.uji.ei1027.clubesportiu.model.Empresa;
 import es.uji.ei1027.clubesportiu.model.Peticion;
 import es.uji.ei1027.clubesportiu.model.UserDetails;
 
@@ -48,8 +52,18 @@ public class PeticionController {
 	@RequestMapping(value="aceptar/{numero}", method=RequestMethod.GET)
 	public String aceptarPeticion(Model model, @PathVariable String numero) {
 		Peticion pet = peticionDao.getPeticion(Integer.parseInt(numero));
-		peticionDao.changeEstado(pet, "aceptada");
-		model.addAttribute("peticiones", peticionDao.getPeticiones());
+		//Hay que asignar una empresa a una personaMayor y crear un contrato
+		ContratoDao contratoDao = new ContratoDao();
+		Contrato contrato = new Contrato();
+		//Vamos a buscar una empresa que no tenga ningun contrato pendiente
+		Empresa empresa = contratoDao.getEmpresaLibre();
+		contrato.setCif_empresa(empresa.getCif());
+		Date today = new Date();
+		contrato.setFecha_inicio(today);		
+		contrato.setTipo_servicio(pet.getTipo_servicio());
+		contratoDao.anadirContrato(contrato);
+		peticionDao.changeEstado2(pet, "aceptada",contrato.getNumero());
+		model.addAttribute("peticiones", peticionDao.getPeticionesPendientes());
 		return "trabajadorSocial/gestionPmPeticiones"; 
 	}
 	
@@ -57,7 +71,7 @@ public class PeticionController {
 	public String rechazarPeticion(Model model, @PathVariable String numero) {
 		Peticion pet = peticionDao.getPeticion(Integer.parseInt(numero));
 		peticionDao.changeEstado(pet, "rechazada");
-		model.addAttribute("peticiones", peticionDao.getPeticiones());
+		model.addAttribute("peticiones", peticionDao.getPeticionesPendientes());
 		return "trabajadorSocial/gestionPmPeticiones"; 
 	}
 	

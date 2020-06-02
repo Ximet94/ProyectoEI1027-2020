@@ -72,16 +72,25 @@ public class TrabajadorSocialController {
 	   return "trabajadorSocial/gestionPMList";
    }
    
-   @RequestMapping("/gestionarPeticiones")
-   public String gestionarPeticiones(Model model) {
+   @RequestMapping("/gestionarPeticionesPendientes")
+   public String gestionarPeticionesPendientes(Model model) {
 	   PeticionDao peticionDao = new PeticionDao();
 		List<Peticion> peticiones = new ArrayList<Peticion>(); 
-		peticiones = peticionDao.getPeticiones();
+		peticiones = peticionDao.getPeticionesPendientes();
 		//System.out.println("Peticiones " + peticiones.toString());
 		model.addAttribute("peticiones", peticiones);
 	   return "trabajadorSocial/gestionPMPeticiones";
    }
    
+   @RequestMapping("historicoPeticiones")
+   public String historicoPeticiones(Model model) {
+	   	PeticionDao peticionDao = new PeticionDao();
+		List<Peticion> peticiones = new ArrayList<Peticion>(); 
+		peticiones = peticionDao.getPeticionesFinalizadas();
+		//System.out.println("Peticiones " + peticiones.toString());
+		model.addAttribute("peticiones", peticiones);
+	   return "trabajadorSocial/historicoPeticiones";
+   }
    
    @RequestMapping("/gestionEmpresa")
    public String gestionEmpresa(Model model) {

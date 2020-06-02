@@ -55,8 +55,20 @@ public class EmpresaController {
 		List<Contrato> contratos = new ArrayList<Contrato>(); 
 		UserDetails user = (UserDetails) session.getAttribute("user");
 		contratos = contratoDao.getContratosFromEmpresa(user.getUsername());
+		System.out.println("Contratos no finalizados " + contratos.toString());
 		model.addAttribute("contratos", contratos);
 		return "empresa/gestionContratos";
+	}
+	
+	@RequestMapping("/gestionContratosFinalizados")
+	public String gestionContratosFinalizados(Model model) {
+		ContratoDao contratoDao = new ContratoDao();
+		List<Contrato> contratos = new ArrayList<Contrato>(); 
+		UserDetails user = (UserDetails) session.getAttribute("user");
+		contratos = contratoDao.getHistoricoContratos(user.getUsername());
+		System.out.println("Contratos finalizados -> " +contratos.toString() );
+		model.addAttribute("contratos", contratos);
+		return "empresa/gestionContratosFinalizados";
 	}
 	
 	@RequestMapping("/gestionPeticiones")

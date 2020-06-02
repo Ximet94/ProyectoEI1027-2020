@@ -57,7 +57,7 @@ public class LoginController {
 	@RequestMapping(value="portada")
 	public String portada (Model model) {
 		UserDetails user = (UserDetails) session.getAttribute("user");
-		//System.out.println("portadaaaaaaaaaaa " + user.getRole());
+		System.out.println("portadaaaaaaaaaaa " + user.getRole());
 		switch(user.getRole()) {
 			case "trabajadorSocial":
 				//System.out.println("holaaaaaaaaaaaaaaaaaa");
