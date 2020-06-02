@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.clubesportiu.model.Contrato;
 import es.uji.ei1027.clubesportiu.model.Empresa;
+import es.uji.ei1027.clubesportiu.model.InformacionContrato;
 import es.uji.ei1027.clubesportiu.model.Peticion;
 
 @Repository
@@ -57,20 +58,37 @@ public class ContratoDao {
 	       }
 	   }
 	   
-	   public List<Contrato> getContratosFromEmpresa(String cif) {
+	   public List<InformacionContrato> getContratosFromEmpresa(String cif) {
 	       try {
-	           return jdbcTemplate.query("SELECT * FROM Contrato where cif_empresa=? and fecha_fin is null", new ContratoRowMapper(),cif);
+	    	   String query="select c.numero as numeroContrato, c.fecha_inicio,c.fecha_fin, "
+	    	   		+ "p.tipo_servicio as estado, p.comentarios, p.dni_personaMayor, pm.nombre, pm.apellidos, "
+	    	   		+ "pm.telefono, pm.email, pm.alergias, pm.enfermedades from contrato c join peticion p on "
+	    	   		+ "c.numero=p.numero_contrato join personamayor pm on p.dni_personamayor=pm.dni "
+	    	   		+ "where p.estado=? and c.cif_empresa=? and c.fecha_fin is null";
+	    	   //System.out.println(query);
+	    	   String a = "aceptada";
+	    	   List<InformacionContrato> ic = jdbcTemplate.query(query,new Object[]{a, cif},new InformacionContratoRowMapper());
+	    	   //System.out.println("Informaciones " + ic.toString());
+	    	   return ic;
+	           //return jdbcTemplate.query("SELECT * FROM Contrato where cif_empresa=? and fecha_fin is null", new ContratoRowMapper(),cif);
 	       }
 	       catch(NullPointerException e) {
-	           return new ArrayList<Contrato>();
+	           return new ArrayList<InformacionContrato>();
 	       }
 	   }
-	   public List<Contrato> getHistoricoContratos(String cif){
+	   public List<InformacionContrato> getHistoricoContratos(String cif){
 		   try {
-	           return jdbcTemplate.query("SELECT * FROM Contrato where cif_empresa=?", new ContratoRowMapper(),cif);
+			  String query="select c.numero as numeroContrato, c.fecha_inicio,c.fecha_fin, p.tipo_servicio as estado, p.comentarios, p.dni_personaMayor, pm.nombre, pm.apellidos, pm.telefono, pm.email, pm.alergias, pm.enfermedades from contrato c join peticion p on c.numero=p.numero_contrato join personamayor pm on p.dni_personamayor=pm.dni where p.estado=? and c.cif_empresa=?";
+			  //System.out.println(query);
+			  String a = "aceptada";
+			  List<InformacionContrato> ic = jdbcTemplate.query(query,new Object[]{a, cif},new InformacionContratoRowMapper());
+			  //System.out.println("Informaciones " + ic.toString());
+			  return ic;
+	           //return jdbcTemplate.query("SELECT * FROM Contrato where cif_empresa=?", new ContratoRowMapper(),cif);
 	       }
-	       catch(NullPointerException e) {
-	           return new ArrayList<Contrato>();
+	       catch(Exception e) {
+	    	   System.out.println("Excepcion -> " + e.toString());
+	           return new ArrayList<InformacionContrato>();
 	       }
 	   }
 	   

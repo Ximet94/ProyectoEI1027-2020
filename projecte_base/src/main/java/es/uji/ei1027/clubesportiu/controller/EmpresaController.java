@@ -20,6 +20,7 @@ import es.uji.ei1027.clubesportiu.dao.EmpresaDao;
 import es.uji.ei1027.clubesportiu.dao.PeticionDao;
 import es.uji.ei1027.clubesportiu.model.Contrato;
 import es.uji.ei1027.clubesportiu.model.Empresa;
+import es.uji.ei1027.clubesportiu.model.InformacionContrato;
 import es.uji.ei1027.clubesportiu.model.Peticion;
 import es.uji.ei1027.clubesportiu.model.UserDetails;
 
@@ -52,7 +53,7 @@ public class EmpresaController {
 	@RequestMapping("/gestionContratos")
 	public String gestionContratos(Model model) {
 		ContratoDao contratoDao = new ContratoDao();
-		List<Contrato> contratos = new ArrayList<Contrato>(); 
+		List<InformacionContrato> contratos = new ArrayList<InformacionContrato>(); 
 		UserDetails user = (UserDetails) session.getAttribute("user");
 		contratos = contratoDao.getContratosFromEmpresa(user.getUsername());
 		System.out.println("Contratos no finalizados " + contratos.toString());
@@ -63,10 +64,10 @@ public class EmpresaController {
 	@RequestMapping("/gestionContratosFinalizados")
 	public String gestionContratosFinalizados(Model model) {
 		ContratoDao contratoDao = new ContratoDao();
-		List<Contrato> contratos = new ArrayList<Contrato>(); 
+		List<InformacionContrato> contratos = new ArrayList<InformacionContrato>(); 
 		UserDetails user = (UserDetails) session.getAttribute("user");
 		contratos = contratoDao.getHistoricoContratos(user.getUsername());
-		System.out.println("Contratos finalizados -> " +contratos.toString() );
+		//System.out.println("Contratos finalizados -> " +contratos.toString() );
 		model.addAttribute("contratos", contratos);
 		return "empresa/gestionContratosFinalizados";
 	}
